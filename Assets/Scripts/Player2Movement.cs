@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class Player2Movement : MonoBehaviour
 {
     public float moveSpeed = 5f;
     public float jumpForce = 10f;
-    private Rigidbody2D rb;
+    private Rigidbody2D rb2;
     private bool isGrounded;
 
     public Transform groundCheck;
@@ -13,22 +13,22 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        rb2 = GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
         // Move left/right
-        float moveInput = Input.GetAxisRaw("Horizontal");
-        rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
+        float moveInput = Input.GetAxisRaw("Horizontal_P2");
+        rb2.linearVelocity = new Vector2(moveInput * moveSpeed, rb2.linearVelocity.y);
 
         // Check if on ground
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
 
         // Jump
-        if (Input.GetKeyDown(KeyCode.W) && isGrounded)
+        if (Input.GetKeyDown(KeyCode.UpArrow) && isGrounded)
         {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+            rb2.linearVelocity = new Vector2(rb2.linearVelocity.x, jumpForce);
         }
     }
 
