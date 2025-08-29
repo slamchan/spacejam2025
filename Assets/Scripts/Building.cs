@@ -1,4 +1,6 @@
 using UnityEngine;
+using TMPro;
+using System.Globalization;
 
 public class Building : MonoBehaviour
 {
@@ -14,34 +16,76 @@ public class Building : MonoBehaviour
     [System.Serializable]
     public class UpgradeLevel
     {
-        public GameObject prefab;     // Optional: new prefab for visual change
         public int resCost;
         public string resType;
         public int requiredBuildLevel;
         public UpgradeEffect[] effects;  // instead of powerGain
+
+        public Sprite sprite;
     }
 
     public int ownerPlayerId = 1;
     public int currentLevel = 0;
     public UpgradeLevel[] upgradePath;
 
+    private SpriteRenderer spriteRenderer; // Assign in Inspector
+
+    private int playerOnTopPlayerId = 0;
+
     private bool playerOnTop = false;
+
+
+    public TMP_Text upgradeCostText; // assign in Inspector
+
 
     private void Update()
     {
-
-        if (Input.GetMouseButtonDown(0))
+        if (playerOnTop)
         {
-                       TryUpgrade();
- 
+            ShowUpgradeCost();
+        }
+        else
+        {
+            HideUpgradeCost();
+            return;
         }
 
+        if (playerOnTopPlayerId == 1 && Input.GetKeyDown(KeyCode.S))
+        {
 
-        if (playerOnTop && Input.GetKeyDown(KeyCode.DownArrow))
+            TryUpgrade();
+        }
+        else if (playerOnTopPlayerId == 2 && Input.GetKeyDown(KeyCode.DownArrow))
         {
             TryUpgrade();
         }
     }
+
+    private void ShowUpgradeCost()
+    {
+        var next = upgradePath[currentLevel];
+        if (next != null)
+        {
+            // Example: assuming next.cost is a PlayerResources-like object
+            TextInfo textInfo = CultureInfo.InvariantCulture.TextInfo;
+            upgradeCostText.text = $"{textInfo.ToTitleCase(next.resType)}:{next.resCost}";
+            upgradeCostText.gameObject.SetActive(true);
+        }
+    }
+
+    private void HideUpgradeCost()
+{
+    if (upgradeCostText != null)
+        upgradeCostText.gameObject.SetActive(false);
+}
+
+
+    private void Awake()
+    {
+        if (spriteRenderer == null)
+            spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
 
     private void TryUpgrade()
     {
@@ -61,20 +105,11 @@ public class Building : MonoBehaviour
             // Apply effect
             ApplyEffects(next);
 
-            // Swap prefab if defined
-            if (next.prefab != null)
+            if (next.sprite != null)
             {
-                GameObject upgraded = Instantiate(next.prefab, transform.position, transform.rotation);
-                var buildingComp = upgraded.GetComponent<Building>();
-                buildingComp.ownerPlayerId = ownerPlayerId;
-                buildingComp.currentLevel = currentLevel + 1;
-                buildingComp.upgradePath = upgradePath;
-                Destroy(gameObject);
+                spriteRenderer.sprite = next.sprite; // next.sprite is the upgraded sprite
             }
-            else
-            {
-                currentLevel++;
-            }
+            currentLevel += 1;
 
             Debug.Log($"Player {ownerPlayerId}: Upgraded building to level {currentLevel + 1}");
         }
@@ -113,15 +148,27 @@ public class Building : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        var player = collision.GetComponent<PlayerController>();
-        if (player != null && player.playerId == ownerPlayerId)
+
+        PlayerController player = collision.GetComponent<PlayerController>();
+        Debug.Log($"{player}");
+
+        if (player != null)
+        {
             playerOnTop = true;
+            playerOnTopPlayerId = player.playerId; // 1 or 2
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        var player = collision.GetComponent<PlayerController>();
-        if (player != null && player.playerId == ownerPlayerId)
+
+        PlayerController player = collision.GetComponent<PlayerController>();
+
+        if (player != null)
+        {
             playerOnTop = false;
+            playerOnTopPlayerId = 0;
+        }
     }
+
 }
