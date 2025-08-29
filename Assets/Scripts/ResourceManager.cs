@@ -5,6 +5,79 @@ public class ResourceManager : MonoBehaviour
 {
     public static ResourceManager Instance;
 
+    public class TechNode
+    {
+        public string id;
+        public string name;
+        public int cost;
+        public TechNode parent;
+        public List<TechNode> children = new List<TechNode>();
+
+        public TechNode(string id, string name, int cost)
+        {
+            this.id = id;
+            this.name = name;
+            this.cost = cost;
+        }
+
+        public void SetParent(TechNode parent)
+        {
+            this.parent = parent;
+            this.parent.children.Add(this);
+        }
+
+        public bool CanResearch(PlayerResources player)
+        {
+            // Parent must be unlocked (unless this is the root node)
+            if (parent != null && !player.HasTech(parent.id))
+                return false;
+
+            // Must have enough tech points
+            if (player.techPoint < cost)
+                return false;
+
+            return true;
+        }
+    }
+
+    public class TechTree
+    {
+        private Dictionary<string, TechNode> nodes = new Dictionary<string, TechNode>();
+        public TechNode Root { get; private set; }
+
+        public TechNode AddNode(string id, string name, int cost, string parentId = null)
+        {
+            var node = new TechNode(id, name, cost);
+            nodes[id] = node;
+
+            if (parentId == null)
+                Root = node;
+            else
+                node.SetParent(nodes[parentId]);
+
+            return node;
+        }
+
+        public TechNode GetNode(string id) =>
+            nodes.ContainsKey(id) ? nodes[id] : null;
+
+        public bool ResearchTech(PlayerResources player, string techId)
+        {
+            var node = GetNode(techId);
+            if (node == null) return false;
+
+            if (node.CanResearch(player))
+            {
+                player.techPoint -= node.cost;
+                player.UnlockTech(node.id);
+                return true;
+            }
+
+            return false;
+        }
+    }
+
+
     [System.Serializable]
     public class PlayerResources
     {
@@ -13,8 +86,9 @@ public class ResourceManager : MonoBehaviour
         public int food = 30;
         public int pop = 3;
         public int power = 3;
-        public int techPoint = 0;
-        public int techLevel = 1;
+        public int techPoint = 15;
+        public int maxBuildLevel = 3;
+        public HashSet<string> unlockedTechs = new HashSet<string>();
 
         public int this[string fieldName]
         {
@@ -28,7 +102,17 @@ public class ResourceManager : MonoBehaviour
                 var field = typeof(PlayerResources).GetField(fieldName);
                 field.SetValue(this, value);
             }
-    }
+        }
+
+        public bool HasTech(string techId)
+        {
+            return unlockedTechs.Contains(techId);
+        }
+
+        public void UnlockTech(string techId)
+        {
+            unlockedTechs.Add(techId);
+        }
     }
 
 
@@ -42,6 +126,16 @@ public class ResourceManager : MonoBehaviour
         // init 2 players
         players[1] = new PlayerResources();
         players[2] = new PlayerResources();
+
+        // Build a simple tree
+        TechTree techTree = new TechTree();
+        techTree.AddNode("buildingLevel1", "Upgrade max building level 1", 1);
+        techTree.AddNode("buildingLevel2", "Upgrade max building level 2", 2, "buildingLevel1");
+        techTree.AddNode("buildingLevel3", "Upgrade max building level 3", 3, "buildingLevel2");
+
+        // Try researching
+        bool success1 = techTree.ResearchTech(players[1], "buildingLevel1");
+        Debug.Log($"Researched \"{techTree.GetNode("buildingLevel1").name}\": {success1}");
     }
 
     public bool SpendResources(int playerId, string resType, int cost)
@@ -55,7 +149,7 @@ public class ResourceManager : MonoBehaviour
         return false;
     }
 
-    public void AddRes(int playerId, string resType, int amount)
+    public void AddResources(int playerId, string resType, int amount)
     {
         var res = players[playerId];
         res[resType] += amount;
