@@ -17,7 +17,7 @@ public class Building : MonoBehaviour
         public GameObject prefab;     // Optional: new prefab for visual change
         public int resCost;
         public string resType;
-        public int requiredTechLevel;
+        public int requiredBuildLevel;
         public UpgradeEffect[] effects;  // instead of powerGain
     }
 
@@ -50,7 +50,7 @@ public class Building : MonoBehaviour
         var next = upgradePath[currentLevel];
         var res = ResourceManager.Instance.players[ownerPlayerId];
 
-        if (res.techLevel < next.requiredTechLevel)
+        if (res.maxBuildLevel < next.requiredBuildLevel)
         {
             Debug.Log($"Player {ownerPlayerId}: Tech level too low for upgrade {currentLevel + 1}!");
             return;
