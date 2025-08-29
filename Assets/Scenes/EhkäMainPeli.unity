@@ -1245,8 +1245,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CameraFollow
   player: {fileID: 2124560460}
   smoothSpeed: 1
-  offset: {x: 0, y: 0, z: -8}
+  offset: {x: 0, y: 5, z: -8}
   zoomOutAmount: 7
+  fixedYPosition: 3
 --- !u!81 &1488380012
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1532,6 +1533,7 @@ MonoBehaviour:
   smoothSpeed: 1
   offset: {x: 0, y: 0, z: -8}
   zoomOutAmount: 7
+  fixedYPosition: 3
 --- !u!1 &1679688107
 GameObject:
   m_ObjectHideFlags: 0
@@ -1871,8 +1873,8 @@ Transform:
   m_GameObject: {fileID: 1964795309}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.011961602, y: 1.5292883, z: 0}
-  m_LocalScale: {x: 0.82912, y: 0.82912, z: 0.82912}
+  m_LocalPosition: {x: 7, y: 2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1679688108}
