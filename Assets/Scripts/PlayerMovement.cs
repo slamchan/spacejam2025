@@ -1,16 +1,15 @@
 using UnityEngine;
 
-public class PlayerJump2D : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed = 5f;
-    public float jumpForce = 7f;
+    public float jumpForce = 10f;
+    private Rigidbody2D rb;
+    private bool isGrounded;
+
     public Transform groundCheck;
     public float groundCheckRadius = 0.2f;
     public LayerMask groundLayer;
-
-    private Rigidbody2D rb;
-    private bool isGrounded;
-    private float moveInput;
 
     void Start()
     {
@@ -19,22 +18,27 @@ public class PlayerJump2D : MonoBehaviour
 
     void Update()
     {
-        // Horizontal movement
-        moveInput = Input.GetAxisRaw("Horizontal");
+        // Move left/right
+        float moveInput = Input.GetAxisRaw("Horizontal");
+        rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
 
-        // Ground check
+        // Check if on ground
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
 
         // Jump
         if (Input.GetKeyDown(KeyCode.W) && isGrounded)
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         }
     }
 
-    void FixedUpdate()
+    void OnDrawGizmosSelected()
     {
-        // Apply horizontal movement
-        rb.velocity = new Vector2(moveInput * moveSpeed, rb.velocity.y);
+        // Visualize ground check in Scene view
+        if (groundCheck != null)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
+        }
     }
 }
