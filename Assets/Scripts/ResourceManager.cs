@@ -8,10 +8,24 @@ public class ResourceManager : MonoBehaviour
     [System.Serializable]
     public class PlayerResources
     {
-        public int wood = 100;
-        public int stone = 50;
-        public int power = 0;
+        public int ore = 10;
+        public int water = 30;
+        public int food = 30;
+        public int pop = 3;
+        public int power = 3;
+        public int techPoint = 0;
         public int techLevel = 1;
+    }
+
+    public enum ResourceTypes
+    {
+        Ore = "ore",
+        Water = "water",
+        Food = "food",
+        Pop = "pop",
+        Power = "power",
+        TechPoint = "techPoint",
+        TechLevel = "techLevel"
     }
 
     public Dictionary<int, PlayerResources> players = new Dictionary<int, PlayerResources>();
@@ -26,30 +40,20 @@ public class ResourceManager : MonoBehaviour
         players[2] = new PlayerResources();
     }
 
-    public bool SpendResources(int playerId, int woodCost, int stoneCost)
+    public bool SpendRes(int playerId, ResourceTypes resType, int cost)
     {
         var res = players[playerId];
-        if (res.wood >= woodCost && res.stone >= stoneCost)
+        if (res[resType] >= cost)
         {
-            res.wood -= woodCost;
-            res.stone -= stoneCost;
+            res[resType] -= cost;
             return true;
         }
         return false;
     }
 
-    public void AddPower(int playerId, int amount)
+    public void AddRes(int playerId, ResourceTypes resType, int amount)
     {
-        players[playerId].power += amount;
-    }
-
-    public int GetTechLevel(int playerId)
-    {
-        return players[playerId].techLevel;
-    }
-
-    public void IncreaseTechLevel(int playerId)
-    {
-        players[playerId].techLevel++;
+        var res = players[playerId];
+        res[resType] += amount;
     }
 }

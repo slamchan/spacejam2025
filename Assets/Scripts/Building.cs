@@ -2,6 +2,15 @@ using UnityEngine;
 
 public class Building : MonoBehaviour
 {
+
+    [System.Serializable]
+    public class UpgradeEffect
+    {
+        public string resourceType; // check TODO POSSIBLE EFFECTS
+        public int amount;          // e.g. +10
+    }
+
+
     [System.Serializable]
     public class UpgradeLevel
     {
@@ -9,7 +18,7 @@ public class Building : MonoBehaviour
         public int woodCost;
         public int stoneCost;
         public int requiredTechLevel;
-        public int powerGain;         // Example effect
+        public UpgradeEffect[] effects;  // instead of powerGain
     }
 
     public int ownerPlayerId = 1;
@@ -20,6 +29,14 @@ public class Building : MonoBehaviour
 
     private void Update()
     {
+
+        if (Input.GetMouseButtonDown(0))
+        {
+                       TryUpgrade();
+ 
+        }
+
+
         if (playerOnTop && Input.GetKeyDown(KeyCode.DownArrow))
         {
             TryUpgrade();
@@ -35,14 +52,14 @@ public class Building : MonoBehaviour
 
         if (res.techLevel < next.requiredTechLevel)
         {
-            Debug.Log($"Player {ownerPlayerId}: Tech level too low for upgrade {currentLevel+1}!");
+            Debug.Log($"Player {ownerPlayerId}: Tech level too low for upgrade {currentLevel + 1}!");
             return;
         }
 
         if (ResourceManager.Instance.SpendResources(ownerPlayerId, next.woodCost, next.stoneCost))
         {
             // Apply effect
-            ApplyEffects(currentLevel);
+            ApplyEffects(next);
 
             // Swap prefab if defined
             if (next.prefab != null)
@@ -59,7 +76,7 @@ public class Building : MonoBehaviour
                 currentLevel++;
             }
 
-            Debug.Log($"Player {ownerPlayerId}: Upgraded building to level {currentLevel+1}");
+            Debug.Log($"Player {ownerPlayerId}: Upgraded building to level {currentLevel + 1}");
         }
         else
         {
@@ -68,26 +85,30 @@ public class Building : MonoBehaviour
     }
 
     private void ApplyEffects(UpgradeLevel level)
-{
-    foreach (var effect in level.effects)
     {
-        switch (effect.resourceType.ToLower())
-        {
-            case "power":
-                owner.resources.power += effect.amount;
-                break;
-            case "food":
-                owner.resources.food += effect.amount;
-                break;
-            case "gold":
-                owner.resources.gold += effect.amount;
-                break;
-            default:
-                Debug.LogWarning($"Unknown effect type: {effect.resourceType}");
-                break;
+        var owner = ResourceManager.Instance.players[ownerPlayerId];
+
+        foreach (var effect in level.effects)
+        {/*
+        TODO POSSIBLE EFFECTS
+            switch (effect.resourceType.ToLower())
+            {
+            
+                case "power":
+                    owner.resources.power += effect.amount;
+                    break;
+                case "food":
+                    owner.resources.food += effect.amount;
+                    break;
+                case "gold":
+                    owner.resources.gold += effect.amount;
+                    break;
+                default:
+                    Debug.LogWarning($"Unknown effect type: {effect.resourceType}");
+                    break;
+            }*/
         }
     }
-}
 
 
     private void OnTriggerEnter2D(Collider2D collision)
