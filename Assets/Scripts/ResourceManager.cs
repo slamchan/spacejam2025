@@ -15,18 +15,22 @@ public class ResourceManager : MonoBehaviour
         public int power = 3;
         public int techPoint = 0;
         public int techLevel = 1;
+
+        public int this[string fieldName]
+        {
+            get
+            {
+                var field = typeof(PlayerResources).GetField(fieldName);
+                return (int)field.GetValue(this);
+            }
+            set
+            {
+                var field = typeof(PlayerResources).GetField(fieldName);
+                field.SetValue(this, value);
+            }
+    }
     }
 
-    public enum ResourceTypes
-    {
-        Ore = "ore",
-        Water = "water",
-        Food = "food",
-        Pop = "pop",
-        Power = "power",
-        TechPoint = "techPoint",
-        TechLevel = "techLevel"
-    }
 
     public Dictionary<int, PlayerResources> players = new Dictionary<int, PlayerResources>();
 
@@ -40,7 +44,7 @@ public class ResourceManager : MonoBehaviour
         players[2] = new PlayerResources();
     }
 
-    public bool SpendRes(int playerId, ResourceTypes resType, int cost)
+    public bool SpendResources(int playerId, string resType, int cost)
     {
         var res = players[playerId];
         if (res[resType] >= cost)
@@ -51,7 +55,7 @@ public class ResourceManager : MonoBehaviour
         return false;
     }
 
-    public void AddRes(int playerId, ResourceTypes resType, int amount)
+    public void AddRes(int playerId, string resType, int amount)
     {
         var res = players[playerId];
         res[resType] += amount;

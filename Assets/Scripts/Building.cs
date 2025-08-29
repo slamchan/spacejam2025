@@ -15,8 +15,8 @@ public class Building : MonoBehaviour
     public class UpgradeLevel
     {
         public GameObject prefab;     // Optional: new prefab for visual change
-        public int woodCost;
-        public int stoneCost;
+        public int resCost;
+        public string resType;
         public int requiredTechLevel;
         public UpgradeEffect[] effects;  // instead of powerGain
     }
@@ -56,7 +56,7 @@ public class Building : MonoBehaviour
             return;
         }
 
-        if (ResourceManager.Instance.SpendResources(ownerPlayerId, next.woodCost, next.stoneCost))
+        if (ResourceManager.Instance.SpendResources(ownerPlayerId, next.resType, next.resCost))
         {
             // Apply effect
             ApplyEffects(next);

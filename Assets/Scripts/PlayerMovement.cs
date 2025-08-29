@@ -34,11 +34,7 @@ public class PlayerMovement : MonoBehaviour
 
     void OnDrawGizmosSelected()
     {
-        // Visualize ground check in Scene view
-        if (groundCheck != null)
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
-        }
+        // Apply horizontal movement
+        rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
     }
 }
