@@ -19,26 +19,24 @@ public class MeteorSpawner : MonoBehaviour
         }
     }
 
-    private void SpawnMeteor()
+   private void SpawnMeteor()
+{
+    Vector2 spawnPos = new Vector2(Random.Range(-xRange, xRange), ySpawn);
+    GameObject meteorInstance = Instantiate(meteorPrefab, spawnPos, Quaternion.identity);
+
+    // Random scale
+    //float randomScale = Random.Range(0.5f, 1.5f);
+    //meteorInstance.transform.localScale = Vector3.one * randomScale;
+
+    // Assign a straight downward direction with a random horizontal angle
+    Meteor meteorScript = meteorInstance.GetComponent<Meteor>();
+    if (meteorScript != null)
     {
-        Vector2 spawnPos = new Vector2(Random.Range(-xRange, xRange), ySpawn);
-
-        // Instantiate the meteor
-        GameObject meteorInstance = Instantiate(meteorPrefab, spawnPos, Quaternion.identity);
-
-        // Randomize scale (applied to the instance, not the prefab)
-        //float randomScale = Random.Range(0.5f, 1.5f);
-        //meteorInstance.transform.localScale = Vector3.one * randomScale;
-
-        // Configure the Meteor script on the instance
-        Meteor meteorScript = meteorInstance.GetComponent<Meteor>();
-        if (meteorScript != null)
-        {
-            meteorScript.drift = new Vector2(Random.Range(-1f, 1f), 0);
-            meteorScript.rotationSpeed = Random.Range(-90f, 90f);
-            meteorScript.wobbleAmount = Random.Range(0.5f, 1.5f);
-            meteorScript.wobbleSpeed = Random.Range(1f, 3f);
-        }
+        float angle = Random.Range(-30f, 30f); // degrees left/right
+        Vector2 dir = Quaternion.Euler(0, 0, angle) * Vector2.down; 
+        meteorScript.SetDirection(dir);
     }
+}
+
 
 }
