@@ -9,7 +9,9 @@ public class Meteor : MonoBehaviour
     public string resourceType;
     public int amount = 1;
 
-    private Vector2 direction;  
+    private Vector2 direction;
+
+
 
     public void SetDirection(Vector2 dir)
     {
@@ -34,6 +36,8 @@ public class Meteor : MonoBehaviour
 
     private void DestroyMeteor()
     {
+        SoundManager.Instance.PlayDestructionSound();
+
         // Spawn collectible if assigned
         if (collectiblePrefab != null && Random.value <= 0.2f)
         {
@@ -48,6 +52,7 @@ public class Meteor : MonoBehaviour
             }
         }
 
+        // Destroy the meteor object
         Destroy(gameObject);
     }
 
@@ -57,7 +62,7 @@ public class Meteor : MonoBehaviour
         PlayerController player = collision.collider.GetComponent<PlayerController>();
         if (player != null)
         {
-//todo
+            //todo
             DestroyMeteor();
         }
 

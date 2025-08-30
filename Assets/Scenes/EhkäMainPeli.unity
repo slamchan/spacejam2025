@@ -1400,7 +1400,7 @@ GameObject:
   - component: {fileID: 1024898822}
   - component: {fileID: 1024898821}
   m_Layer: 0
-  m_Name: MusicPlayer
+  m_Name: SoundManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1415,10 +1415,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1024898820}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22d2d0078d9239940bddeaa3a327d28f, type: 3}
+  m_Script: {fileID: 11500000, guid: 680dd0ecf998ada4183aa5d3503cf948, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MusicManager
   backgroundMusic: {fileID: 8300000, guid: d689b2ce606f3b74daf9c5d452213929, type: 3}
+  destructionSound: {fileID: 8300000, guid: a210ebff16e0dee459b527f0d51a5e4e, type: 3}
 --- !u!82 &1024898822
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2778,11 +2779,11 @@ MonoBehaviour:
   - resCost: 0
     resType: ore
     requiredBuildLevel: 0
-    sprite: {fileID: 5088316998373936774, guid: bd39e90b7a28bd148aa45a40f40b4521, type: 3}
+    sprite: {fileID: 2023553009028401766, guid: 307c2e1f1c45852458d03fd7fdf5f82a, type: 3}
   - resCost: 0
     resType: ore
     requiredBuildLevel: 0
-    sprite: {fileID: -855298285791758126, guid: b24f20d0bf29c1c49bd0ceabc4654fc4, type: 3}
+    sprite: {fileID: 221864673165975527, guid: 28404a955bbda304c9bc05ab08d68136, type: 3}
   - resCost: 0
     resType: ore
     requiredBuildLevel: 0
@@ -2844,7 +2845,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.5, y: 1.5}
+    oldSize: {x: 3.18, y: 1.23}
     newSize: {x: 3.61, y: 4.12}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -2899,7 +2900,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 5088316998373936774, guid: bd39e90b7a28bd148aa45a40f40b4521, type: 3}
+  m_Sprite: {fileID: 2023553009028401766, guid: 307c2e1f1c45852458d03fd7fdf5f82a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -3763,11 +3764,11 @@ MonoBehaviour:
   - resCost: 0
     resType: ore
     requiredBuildLevel: 0
-    sprite: {fileID: 5088316998373936774, guid: bd39e90b7a28bd148aa45a40f40b4521, type: 3}
+    sprite: {fileID: 2023553009028401766, guid: 307c2e1f1c45852458d03fd7fdf5f82a, type: 3}
   - resCost: 0
     resType: ore
     requiredBuildLevel: 0
-    sprite: {fileID: -855298285791758126, guid: b24f20d0bf29c1c49bd0ceabc4654fc4, type: 3}
+    sprite: {fileID: 221864673165975527, guid: 28404a955bbda304c9bc05ab08d68136, type: 3}
   - resCost: 0
     resType: ore
     requiredBuildLevel: 0
@@ -3829,7 +3830,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.5, y: 1.5}
+    oldSize: {x: 3.18, y: 1.23}
     newSize: {x: 3.61, y: 4.12}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -3884,7 +3885,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 5088316998373936774, guid: bd39e90b7a28bd148aa45a40f40b4521, type: 3}
+  m_Sprite: {fileID: 2023553009028401766, guid: 307c2e1f1c45852458d03fd7fdf5f82a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
