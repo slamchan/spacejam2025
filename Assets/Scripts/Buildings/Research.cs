@@ -1,10 +1,14 @@
 using UnityEngine;
 using System.Collections.Generic;
+using TMPro;
+using System.Globalization;
 
 public class Research : Building
 {
-    public List<List<TechLevel>> upgradePaths;// = new List<List<TechLevel>>();
+    public List<List<TechLevel>> upgradePaths;
     public TechTree techTree;
+    public int selectedTechIndex = 0;
+    public TMP_Text selectedTechText;
 
     public class TechLevel : UpgradeLevel
     {
@@ -42,15 +46,32 @@ public class Research : Building
         }
     }
 
+    private void ShowSelectedTech()
+    {
+        TextInfo textInfo = CultureInfo.InvariantCulture.TextInfo;
+        List<TechLevel> selectedTechPaths = upgradePaths[selectedTechIndex];
+        TechLevel selectedTech = selectedTechPaths[selectedTechPaths.Count - 1];
+        Debug.Log(selectedTech.tech.name);
+        Debug.Log(selectedTech.resType);
+        Debug.Log(selectedTech.resCost);
+        selectedTechText.text = $"{selectedTech.tech.name} level {selectedTech.tech.level}\n{selectedTech.resType}: {selectedTech.resCost}";
+        selectedTechText.gameObject.SetActive(true);
+    }
+
 
 
     protected override void NewUpdate()
     {
         base.NewUpdate();
 
+        if (playerOnTop)
+        {
+            ShowSelectedTech();
+        }
+
         if (playerOnTopPlayerId == 1 && Input.GetKeyDown(KeyCode.W))
         {
-            
+
         }
         else if (playerOnTopPlayerId == 2 && Input.GetKeyDown(KeyCode.UpArrow))
         {
@@ -58,11 +79,11 @@ public class Research : Building
         }
         if (playerOnTopPlayerId == 1 && Input.GetKeyDown(KeyCode.S))
         {
-            
+
         }
         else if (playerOnTopPlayerId == 2 && Input.GetKeyDown(KeyCode.DownArrow))
         {
-            
+
         }
     }
 }

@@ -15,6 +15,7 @@ public class BuildingSlot : MonoBehaviour
     [Header("UI")]
     public TMP_Text upgradeCostText;  // Assign in inspector
 
+
     private void Update()
     {
         if (isOccupied || playerOnTopId == -1) return;
