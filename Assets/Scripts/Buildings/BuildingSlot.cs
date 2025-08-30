@@ -90,6 +90,8 @@ public class BuildingSlot : MonoBehaviour
             playerOnTopId = player.playerId;
             player.canJump = false; // or whatever your PlayerController uses
             ShowSelectedBuildingInfo();
+                        PositionUpgradeText();
+
         }
     }
 
@@ -105,4 +107,30 @@ public class BuildingSlot : MonoBehaviour
             player.canJump = true;
         }
     }
+
+    
+    private void PositionUpgradeText()
+    {
+        if (upgradeCostText == null) return;
+
+        RectTransform rt = upgradeCostText.GetComponent<RectTransform>();
+
+        if (playerOnTopId == 2)
+        {
+            // Right-center for Player 2
+            rt.anchorMin = new Vector2(1, 0.5f);
+            rt.anchorMax = new Vector2(1, 0.5f);
+            rt.pivot = new Vector2(1, 0.5f);
+            rt.anchoredPosition = new Vector2(-50, 0); // adjust offset
+        }
+        else
+        {
+            // Left-center for Player 1
+            rt.anchorMin = new Vector2(0, 0.5f);
+            rt.anchorMax = new Vector2(0, 0.5f);
+            rt.pivot = new Vector2(0, 0.5f);
+            rt.anchoredPosition = new Vector2(50, 0); // adjust offset
+        }
+    }
+
 }

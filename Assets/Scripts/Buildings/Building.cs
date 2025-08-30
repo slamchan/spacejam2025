@@ -49,7 +49,6 @@ public class Building : MonoBehaviour
 
         if (playerOnTopPlayerId == 1 && Input.GetKeyDown(KeyCode.S))
         {
-
             TryUpgrade();
         }
         else if (playerOnTopPlayerId == 2 && Input.GetKeyDown(KeyCode.DownArrow))
@@ -103,7 +102,10 @@ public class Building : MonoBehaviour
             TextInfo textInfo = CultureInfo.InvariantCulture.TextInfo;
             upgradeCostText.text = $"{buildingName}\nMAX\n{currentWorkers}/{currentLevel}";
             upgradeCostText.gameObject.SetActive(true);
+
+            PositionUpgradeText();
         }
+
         else
         {
             var next = upgradePath[currentLevel];
@@ -112,9 +114,39 @@ public class Building : MonoBehaviour
                 TextInfo textInfo = CultureInfo.InvariantCulture.TextInfo;
                 upgradeCostText.text = $"{buildingName}\n{textInfo.ToTitleCase(next.resType)}:{next.resCost}\n{currentWorkers}/{currentLevel} ";
                 upgradeCostText.gameObject.SetActive(true);
+
+                PositionUpgradeText();
             }
         }
     }
+
+    private void PositionUpgradeText()
+    {
+        if (upgradeCostText == null) return;
+
+        RectTransform rt = upgradeCostText.GetComponent<RectTransform>();
+
+        if (ownerPlayerId == 2)
+        {
+            // Right-center for Player 2
+            rt.anchorMin = new Vector2(1, 0.5f);
+            rt.anchorMax = new Vector2(1, 0.5f);
+            rt.pivot = new Vector2(1, 0.5f);
+            rt.anchoredPosition = new Vector2(-50, 0); // adjust offset
+        }
+        else
+        {
+            // Left-center for Player 1
+            rt.anchorMin = new Vector2(0, 0.5f);
+            rt.anchorMax = new Vector2(0, 0.5f);
+            rt.pivot = new Vector2(0, 0.5f);
+            rt.anchoredPosition = new Vector2(50, 0); // adjust offset
+        }
+    }
+
+
+
+
     protected void HideUpgradeCost()
     {
         if (upgradeCostText != null)
@@ -166,6 +198,7 @@ public class Building : MonoBehaviour
             {
                 playerOnTop = true;
                 playerOnTopPlayerId = player.playerId;
+                player.canJump = false;
             }
         }
         else
@@ -196,6 +229,7 @@ public class Building : MonoBehaviour
         {
             playerOnTop = false;
             playerOnTopPlayerId = 0;
+            player.canJump = true;
         }
     }
 
@@ -203,7 +237,7 @@ public class Building : MonoBehaviour
     {
         if (owner != null)
         {
-        if ((currentWorkers < currentLevel || upg < 0) && currentWorkers + upg >= 0)
+            if ((currentWorkers < currentLevel || upg < 0) && currentWorkers + upg >= 0)
             {
                 bool success = owner.AssingWorker(upg);
                 if (success)

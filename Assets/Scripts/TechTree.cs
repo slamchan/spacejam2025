@@ -73,9 +73,9 @@ public class TechTree
         return null;
     }
 
-    public bool ResearchTech(ResourceManager.PlayerResources player, string name, int level)
+    public bool ResearchTech(ResourceManager.PlayerResources player, string idPrefix, int level)
     {
-        var node = GetNode(name, level);
+        var node = GetNode(idPrefix, level);
         if (node == null) return false;
 
         if (node.CanResearch(player))

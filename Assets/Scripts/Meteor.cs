@@ -39,7 +39,7 @@ public class Meteor : MonoBehaviour
         SoundManager.Instance.PlayDestructionSound();
 
         // Spawn collectible if assigned
-        if (collectiblePrefab != null && Random.value <= 0.2f)
+        if (collectiblePrefab != null && Random.value <= 0.01f)
         {
             GameObject collectible = Instantiate(collectiblePrefab, transform.position, Quaternion.identity);
 
