@@ -3179,7 +3179,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 3616400437380048829, guid: 501cba9335676ed498ec325b490b5f63, type: 3}
+  m_Sprite: {fileID: -8360621857648827146, guid: 909e181821991094ba675c415f581f7c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3256,7 +3256,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.6187, y: -3.33, z: 0}
-  m_LocalScale: {x: 1000, y: 1, z: 1}
+  m_LocalScale: {x: 1200, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -4463,7 +4463,7 @@ MonoBehaviour:
   mapImage: {fileID: 2043257821}
   playerIcon: {fileID: 1405001071}
   player: {fileID: 1964795314}
-  halfWorldWidth: 10
+  halfWorldWidth: 80
   halfWorldHeight: 5
 --- !u!114 &1964795316
 MonoBehaviour:
@@ -5042,7 +5042,7 @@ MonoBehaviour:
   mapImage: {fileID: 1022824045}
   playerIcon: {fileID: 1651542795}
   player: {fileID: 2124560460}
-  halfWorldWidth: 10
+  halfWorldWidth: 80
   halfWorldHeight: 5
 --- !u!50 &2124560457
 Rigidbody2D:
