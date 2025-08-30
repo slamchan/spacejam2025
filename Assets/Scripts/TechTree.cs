@@ -1,10 +1,11 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 
 public class TechTree
 {
     private Dictionary<string, TechNode> nodes = new Dictionary<string, TechNode>();
-    public TechNode Root { get; private set; }
+    public ArrayList roots = new ArrayList();
 
     public TechNode AddNode(string idPrefix, string name, int baseCost = 0, string parentId = null)
     {
@@ -29,7 +30,7 @@ public class TechTree
         }
         else
         {
-            Root = node;
+            roots.Add(node);
         }
 
         nodes[newId] = node;
@@ -43,10 +44,13 @@ public class TechTree
         AddNode("iceDrillMaxLevel", "Upgrade max ice drill", 1);
         AddNode("farmDomeMaxLevel", "Upgrade max farming dome", 1);
         AddNode("habitatMaxLevel", "Upgrade max habitat", 1);
+        AddNode("powerMaxLevel", "Upgrade max power", 1);
         AddNode("laserTurretMaxLevel", "Upgrade max laser turret", 2);
         AddNode("shieldMaxLevel", "Upgrade max shield", 3);
-        AddNode("oreProd", "Upgrade ore production", 3);
-        AddNode("iceProd", "Upgrade max shield", 3);
+        AddNode("oreProd", "Upgrade ore productivity", 3);
+        AddNode("iceProd", "Upgrade ice productivity", 3);
+        AddNode("foodProd", "Upgrade food productivity", 3);
+        AddNode("powerProd", "Upgrade power productivity", 3);
     }
 
     public TechNode GetNodeById(string id) =>
