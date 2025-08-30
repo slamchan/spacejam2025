@@ -5,8 +5,8 @@ using System.Collections.Generic;
 public class Base : Building
 {
     [Header("Shield Settings")]
-    public int shieldHP = 100;
-    public int maxShieldHP = 100;
+    public int shieldHP = 0;
+    public int maxShieldHP = 0;
     public float shieldRadius = 5f;
 
     private int startingShield = 50;
@@ -178,6 +178,12 @@ public class Base : Building
 
 
 
+    protected override void AssignWorker(int upg)
+    {
+        return;
+    }
+
+
     protected override void ApplyUpgradeEffects(int upg)
     {
         base.ApplyUpgradeEffects(upg);
@@ -199,10 +205,11 @@ public class Base : Building
 
         owner.maxPop += 4 * upg;
         owner.pop += 4 * upg;
-        owner.powerExpense += 1;
+        owner.availablePop += 4 * upg;
+        owner.powerExpense += 2 * upg;
+        owner.foodIncome -= 6 * upg;
         if (owner.pop > owner.maxPop)
         {
-            owner.powerExpense -= 1;
             owner.pop = owner.maxPop;
         }
     }

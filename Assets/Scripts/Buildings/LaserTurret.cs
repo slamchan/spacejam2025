@@ -79,12 +79,26 @@ public class LaserTurret : Building
         }
     }
 
+    protected override void AssignWorker(int upg)
+    {
+        if (currentWorkers < currentLevel)
+        {
+            bool success = owner.AssingWorker(upg);
+            if (success)
+            {
+                currentWorkers++;
+                //base.AssignWorker(upg);
+                range += 10f + currentWorkers * 2f;
+                damage += 2 + currentWorkers * 2;
+                fireRate += 0.5f * currentWorkers + 1f;
+
+                Debug.Log($"Assigned {upg} worker(s) to this building.");
+            }
+        }
+    }
+
     protected override void ApplyUpgradeEffects(int upg)
     {
-        range = 10 + currentLevel * 2;
-        damage = 2 + currentLevel * 2;
-        fireRate = 0.5f * currentLevel;
-
         owner.powerExpense += 1 * upg;
     }
 }

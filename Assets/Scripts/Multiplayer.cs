@@ -12,7 +12,7 @@ public class Multiplayer : MonoBehaviour
     private void Start()
     {
         loadedToggleState = PlayerPrefs.GetInt("ToggleState", 0) == 1;
-        //loadedToggleState = true;
+        loadedToggleState = true;
         P2 = loadedToggleState;
     }
 

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PowerPlant : Building
+public class MineralDrill : Building
 {
     protected override void AssignWorker(int upg)
     {
@@ -10,11 +10,15 @@ public class PowerPlant : Building
             bool success = owner.AssingWorker(upg);
             if (success)
             {
-                currentWorkers++;
-                owner.powerIncome += 1 * upg * owner.powerMod;
+                currentWorkers++; owner.oreIncome += 1 * upg * owner.oreMod;
+
+
                 Debug.Log($"Assigned {upg} worker(s) to this building.");
             }
         }
-
+    }
+    protected override void ApplyUpgradeEffects(int upg)
+    {
+        owner.powerExpense += 2 * upg;
     }
 }

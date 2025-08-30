@@ -56,6 +56,24 @@ public class Building : MonoBehaviour
         {
             TryUpgrade();
         }
+        // Handle Player 1 key input
+        if (owner == ResourceManager.Instance.players[1]) // Player 1
+        {
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                // Example: Assign 1 worker
+                AssignWorker(1);
+            }
+        }
+        // Handle Player 2 key input
+        else if (owner == ResourceManager.Instance.players[2]) // Player 2
+        {
+            if (Input.GetKeyDown(KeyCode.Minus))  // "-" key for Player 2
+            {
+                // Example: Assign 1 worker
+                AssignWorker(1);
+            }
+        }
     }
 
 
@@ -172,9 +190,20 @@ public class Building : MonoBehaviour
         }
     }
 
-    protected virtual void AssingWorker(int upg)
+    protected virtual void AssignWorker(int upg)
     {
-        owner.AssingWorker(upg);
+        if (owner != null)
+        {
+            if (currentWorkers < currentLevel)
+            {
+                bool success = owner.AssingWorker(upg);
+                if (success)
+                {
+                    currentWorkers++;
+                    Debug.Log($"Assigned {upg} worker(s) to this building.");
+                }
+            }
+        }
     }
 
     protected void Upgrade(int upg)

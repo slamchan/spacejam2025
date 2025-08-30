@@ -249,9 +249,9 @@ GameObject:
   - component: {fileID: 8016458226507681922}
   - component: {fileID: 591434302859434662}
   - component: {fileID: 519756454232727641}
-  - component: {fileID: 7585263359759785138}
+  - component: {fileID: 2124724943328152599}
   m_Layer: 8
-  m_Name: Drill
+  m_Name: IceDrill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -377,7 +377,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.5, y: 1.5}
   m_EdgeRadius: 0
---- !u!114 &7585263359759785138
+--- !u!114 &2124724943328152599
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -386,9 +386,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 8960172238221543338}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36810e0fb8453af409a75850eb60b1dc, type: 3}
+  m_Script: {fileID: 11500000, guid: 79ac3659f56ad694c91dd7dc94a05509, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Drill
+  m_EditorClassIdentifier: Assembly-CSharp::IceDrill
   ownerPlayerId: 1
   currentLevel: 0
   upgradePath:
@@ -412,5 +412,5 @@ MonoBehaviour:
     resType: ore
     requiredBuildLevel: 0
     sprite: {fileID: -4178046375966092550, guid: 18bebd0961a0b554594c2d021a5f17b9, type: 3}
-  buildingName: Drill
+  buildingName: IceDrill
   upgradeCostText: {fileID: 7119800386542062150}
