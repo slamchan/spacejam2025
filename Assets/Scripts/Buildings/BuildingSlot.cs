@@ -56,10 +56,21 @@ public class BuildingSlot : MonoBehaviour
         }
         isOccupied = true;
 
-        // Hide UI once built
+        // Hide UI
         if (upgradeCostText != null)
             upgradeCostText.text = "";
+
+        // Hide the slot visually (optional: scale to zero or disable renderer)
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+        if (sr != null)
+            sr.enabled = false;
+
+        // Optionally disable the collider so the player can walk through
+        Collider2D col = GetComponent<Collider2D>();
+        if (col != null)
+            col.enabled = false;
     }
+
 
     private void ShowSelectedBuildingInfo()
     {

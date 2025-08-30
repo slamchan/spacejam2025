@@ -21,7 +21,7 @@ public class Base : Building
     public float regenDelay = 30f;
 
     public GameObject slotPrefab;   // Empty "slot" marker prefab
-    public float slotSpacing = 10f;  // Distance from base
+    public float slotSpacing = 0f;  // Distance from base
     private List<BuildingSlot> slots = new List<BuildingSlot>();
 
     protected override void NewAwake()
@@ -193,7 +193,7 @@ public class Base : Building
             shieldHP = maxShieldHP;
         }
         UpdateShieldStatus();
-        slotSpacing += 2;
+        slotSpacing += 3;
         AddSlots(1);
     }
 
