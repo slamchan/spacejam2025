@@ -40,7 +40,6 @@ public class Base : Building
         shieldRenderer.loop = true;
         shieldRenderer.useWorldSpace = false;
         shieldRenderer.widthMultiplier = 0.05f;
-        ApplyUpgradeEffects();
         DrawShield();
         UpdateShieldStatus();
 
@@ -179,9 +178,9 @@ public class Base : Building
 
 
 
-    protected override void ApplyUpgradeEffects()
+    protected override void ApplyUpgradeEffects(int upg)
     {
-        base.ApplyUpgradeEffects();
+        base.ApplyUpgradeEffects(upg);
         maxShieldHP = currentLevel * startingShield;
         shieldRadius = 5f + currentLevel * 2f;
         if (maxShieldHP > shieldHP)
@@ -195,8 +194,17 @@ public class Base : Building
         UpdateShieldStatus();
         slotSpacing += 3;
         AddSlots(1);
-        meteorSpawner.xRange += 3;
-        meteorSpawner.ySpawn += 3;
+        meteorSpawner.xRange += 3 * upg;
+        meteorSpawner.ySpawn += 3 * upg;
+
+        owner.maxPop += 4 * upg;
+        owner.pop += 4 * upg;
+        owner.powerExpense += 1;
+        if (owner.pop > owner.maxPop)
+        {
+            owner.powerExpense -= 1;
+            owner.pop = owner.maxPop;
+        }
     }
 
 }

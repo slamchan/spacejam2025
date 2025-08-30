@@ -2,9 +2,13 @@ using UnityEngine;
 
 public class Drill : Building
 {
-    protected override void ApplyUpgradeEffects()
+        protected override void AssingWorker(int upg)
     {
-        var owner = ResourceManager.Instance.players[ownerPlayerId];
-        owner.waterIncome += 0.2f * (currentLevel + 1);
+        base.AssingWorker(upg);
+        owner.waterIncome += 1*upg;
+    }
+    protected override void ApplyUpgradeEffects(int upg)
+    {
+        owner.powerExpense += 2 * upg;
     }
 }

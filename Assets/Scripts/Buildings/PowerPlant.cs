@@ -2,10 +2,8 @@ using UnityEngine;
 
 public class PowerPlant : Building
 {
-
-    protected override void ApplyUpgradeEffects()
+    protected override void ApplyUpgradeEffects(int upg)
     {
-        var owner = ResourceManager.Instance.players[ownerPlayerId];
-        owner.powerIncome += 2.2f * (currentLevel + 1);
+        owner.powerIncome -= 3 * upg;
     }
 }

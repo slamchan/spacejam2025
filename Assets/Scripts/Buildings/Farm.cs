@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class Farm : Building
 {
-    protected override void ApplyUpgradeEffects()
+
+    protected override void ApplyUpgradeEffects(int upg)
     {
-        var owner = ResourceManager.Instance.players[ownerPlayerId];
-        owner.foodIncome += 0.2f * (currentLevel + 1);
+        owner.powerExpense += 1 * upg;
     }
 }
