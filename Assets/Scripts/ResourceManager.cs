@@ -7,7 +7,8 @@ public class ResourceManager : MonoBehaviour
 {
     public static ResourceManager Instance;
 
-    public MeteorSpawner spawner;
+    public MeteorSpawner spawnerP1;
+    public MeteorSpawner spawnerP2;
 
     public class TechNode
     {
@@ -169,7 +170,8 @@ public class ResourceManager : MonoBehaviour
                 int amount = Mathf.FloorToInt(players[i].GetIncome(res));
                 players[i][res] += amount;
             }
-            spawner.TriggerSpawn();
+            spawnerP1.TriggerSpawn();
+            spawnerP2.TriggerSpawn();
            // spawner.difficultyLevel++;
         }
 

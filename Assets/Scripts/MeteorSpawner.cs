@@ -8,12 +8,12 @@ public class MeteorSpawner : MonoBehaviour
     public float ySpawn = 10f;       // Height to spawn
 
     [Header("Burst Settings")]
-    public int meteorsPerBurst = 5;  // How many meteors per trigger
+    public int meteorsPerBurst = 20;  // How many meteors per trigger
     public float burstInterval = 0.2f; // Delay between meteors in a burst
 
     [Header("Difficulty Settings")]
     public int difficultyLevel = 1;  // Difficulty multiplier
-    public float angleRange = 30f;   // Max deviation from straight down
+    public float angleRange = 60f;   // Max deviation from straight down
 
     private bool spawning = false;
 
@@ -42,7 +42,12 @@ public class MeteorSpawner : MonoBehaviour
 
     private void SpawnMeteor()
     {
-        Vector2 spawnPos = new Vector2(Random.Range(-xRange, xRange), ySpawn);
+        // Spawn directly above the spawner/base
+        Vector2 spawnPos = new Vector2(
+            transform.position.x + Random.Range(-xRange, xRange),  // optional horizontal spread
+            transform.position.y + ySpawn                            // height above the spawner
+        );
+
         GameObject meteorInstance = Instantiate(meteorPrefab, spawnPos, Quaternion.identity);
 
         Meteor meteorScript = meteorInstance.GetComponent<Meteor>();
@@ -57,4 +62,5 @@ public class MeteorSpawner : MonoBehaviour
             meteorScript.power = Mathf.CeilToInt(meteorScript.power * difficultyLevel);
         }
     }
+
 }

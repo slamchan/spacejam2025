@@ -35,7 +35,7 @@ public class Meteor : MonoBehaviour
     private void DestroyMeteor()
     {
         // Spawn collectible if assigned
-        if (collectiblePrefab != null)
+        if (collectiblePrefab != null && Random.value <= 0.2f)
         {
             GameObject collectible = Instantiate(collectiblePrefab, transform.position, Quaternion.identity);
 

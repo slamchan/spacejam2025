@@ -24,6 +24,8 @@ public class Base : Building
     public float slotSpacing = 0f;  // Distance from base
     private List<BuildingSlot> slots = new List<BuildingSlot>();
 
+    public MeteorSpawner meteorSpawner;
+
     protected override void NewAwake()
     {
         base.NewAwake();
@@ -159,8 +161,6 @@ public class Base : Building
                         Upgrade(-1);
 
                     }
-                    Debug.Log($"Level of the building is {currentLevel}");
-
                 }
             }
         }
@@ -195,6 +195,8 @@ public class Base : Building
         UpdateShieldStatus();
         slotSpacing += 3;
         AddSlots(1);
+        meteorSpawner.xRange += 3;
+        meteorSpawner.ySpawn += 3;
     }
 
 }

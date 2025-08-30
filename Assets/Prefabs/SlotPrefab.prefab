@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4802263414834193455}
   - component: {fileID: 9054768949186519682}
   - component: {fileID: 332506146522718658}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: SlotPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -171,7 +171,7 @@ GameObject:
   - component: {fileID: 4373791771851904000}
   - component: {fileID: 6409013933795402532}
   - component: {fileID: 5646425988219673882}
-  m_Layer: 8
+  m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -272,7 +272,7 @@ GameObject:
   - component: {fileID: 944454333308799554}
   - component: {fileID: 5087581941244526065}
   - component: {fileID: 6043469671828850310}
-  m_Layer: 8
+  m_Layer: 5
   m_Name: BuildingText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
