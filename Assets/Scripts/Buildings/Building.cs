@@ -64,6 +64,11 @@ public class Building : MonoBehaviour
                 // Example: Assign 1 worker
                 AssignWorker(1);
             }
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                // Example: Assign 1 worker
+                AssignWorker(-1);
+            }
         }
         // Handle Player 2 key input
         else if (owner == ResourceManager.Instance.players[2]) // Player 2
@@ -72,6 +77,11 @@ public class Building : MonoBehaviour
             {
                 // Example: Assign 1 worker
                 AssignWorker(1);
+            }
+            if (Input.GetKeyDown(KeyCode.Period))
+            {
+                // Example: Assign 1 worker
+                AssignWorker(-1);
             }
         }
     }
@@ -105,7 +115,6 @@ public class Building : MonoBehaviour
             }
         }
     }
-
     protected void HideUpgradeCost()
     {
         if (upgradeCostText != null)
@@ -194,12 +203,12 @@ public class Building : MonoBehaviour
     {
         if (owner != null)
         {
-            if (currentWorkers < currentLevel)
+        if ((currentWorkers < currentLevel || upg < 0) && currentWorkers + upg >= 0)
             {
                 bool success = owner.AssingWorker(upg);
                 if (success)
                 {
-                    currentWorkers++;
+                    currentWorkers += upg;
                     Debug.Log($"Assigned {upg} worker(s) to this building.");
                 }
             }

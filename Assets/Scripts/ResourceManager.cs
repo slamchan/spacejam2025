@@ -92,7 +92,7 @@ public class ResourceManager : MonoBehaviour
             }
             else if (number < 0)
             {
-                availablePop += number;
+                availablePop -= number;
                 return true;
             }
             return false;

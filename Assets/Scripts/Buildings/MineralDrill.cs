@@ -5,14 +5,13 @@ public class MineralDrill : Building
     protected override void AssignWorker(int upg)
     {
 
-        if (currentWorkers < currentLevel)
+        if ((currentWorkers < currentLevel || upg < 0) && currentWorkers + upg >= 0)
         {
             bool success = owner.AssingWorker(upg);
             if (success)
             {
-                currentWorkers++; owner.oreIncome += 1 * upg * owner.oreMod;
-
-
+                currentWorkers += upg;
+                owner.oreIncome += 1 * upg * owner.oreMod;
                 Debug.Log($"Assigned {upg} worker(s) to this building.");
             }
         }

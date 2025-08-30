@@ -79,12 +79,12 @@ public class LaserTurret : Building
 
     protected override void AssignWorker(int upg)
     {
-        if (currentWorkers < currentLevel)
+        if ((currentWorkers < currentLevel || upg < 0) && currentWorkers + upg >= 0)
         {
             bool success = owner.AssingWorker(upg);
             if (success)
             {
-                currentWorkers++;
+                currentWorkers += upg;
                 //base.AssignWorker(upg);
                 range += 10f + currentWorkers * 2f;
                 damage += 2 + currentWorkers * 2;
