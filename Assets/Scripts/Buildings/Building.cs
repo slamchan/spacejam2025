@@ -18,6 +18,7 @@ public class Building : MonoBehaviour
     public int currentLevel = 0;
     protected int buildingHp = 2;
     protected int buildingMaxHp = 2;
+    protected int currentWorkers = 0;
     public UpgradeLevel[] upgradePath;
 
     protected SpriteRenderer spriteRenderer; // Assign in Inspector
@@ -27,9 +28,10 @@ public class Building : MonoBehaviour
     protected bool playerOnTop = false;
 
     public string buildingName;
+    protected ResourceManager.PlayerResources owner;
 
 
-    public TMP_Text upgradeCostText; // assign in Inspector
+    public TMP_Text upgradeCostText;
 
 
     protected void Update()
@@ -57,14 +59,19 @@ public class Building : MonoBehaviour
     }
 
 
+    void Start()
+    {
+        // Assuming ownerPlayerId is set somewhere in your class
+        owner = ResourceManager.Instance.players[ownerPlayerId];
+    }
+
     // Make these virtual so child classes can extend them
     protected virtual void NewAwake() { }
     protected virtual void NewUpdate() { }
     protected void ShowUpgradeCost()
     {
-        if (currentLevel >= upgradePath.Length-1)
+        if (currentLevel >= upgradePath.Length - 1)
         {
-            // Example: assuming next.cost is a PlayerResources-like object
             TextInfo textInfo = CultureInfo.InvariantCulture.TextInfo;
             upgradeCostText.text = $"{buildingName}\nMAX";
             upgradeCostText.gameObject.SetActive(true);
@@ -74,15 +81,11 @@ public class Building : MonoBehaviour
             var next = upgradePath[currentLevel];
             if (next != null)
             {
-                // Example: assuming next.cost is a PlayerResources-like object
                 TextInfo textInfo = CultureInfo.InvariantCulture.TextInfo;
                 upgradeCostText.text = $"{buildingName}\n{textInfo.ToTitleCase(next.resType)}:{next.resCost}";
                 upgradeCostText.gameObject.SetActive(true);
             }
-
         }
-
-
     }
 
     protected void HideUpgradeCost()
@@ -102,12 +105,11 @@ public class Building : MonoBehaviour
 
     protected void TryUpgrade()
     {
-        if (currentLevel >= upgradePath.Length-1) return;
+        if (currentLevel >= upgradePath.Length - 1) return;
 
         var next = upgradePath[currentLevel];
-        var res = ResourceManager.Instance.players[ownerPlayerId];
 
-        if (res.maxBuildLevel < next.requiredBuildLevel)
+        if (owner.maxBuildLevel < next.requiredBuildLevel)
         {
             Debug.Log($"Player {ownerPlayerId}: Tech level too low for upgrade {currentLevel + 1}!");
             return;
@@ -123,7 +125,7 @@ public class Building : MonoBehaviour
         }
     }
 
-    protected virtual void ApplyUpgradeEffects()
+    protected virtual void ApplyUpgradeEffects(int upg)
     {
     }
 
@@ -170,6 +172,11 @@ public class Building : MonoBehaviour
         }
     }
 
+    protected virtual void AssingWorker(int upg)
+    {
+        owner.AssingWorker(upg);
+    }
+
     protected void Upgrade(int upg)
     {
         Debug.Log($"Level of the building is {currentLevel}");
@@ -185,7 +192,8 @@ public class Building : MonoBehaviour
         int HpIncrease = 1;
         buildingMaxHp = HpIncrease * (currentLevel + 1);
         buildingHp = buildingMaxHp;
-        ApplyUpgradeEffects();
+
+        ApplyUpgradeEffects(upg);
 
         Debug.Log($"Player {ownerPlayerId}: Upgraded building to level {currentLevel}");
     }

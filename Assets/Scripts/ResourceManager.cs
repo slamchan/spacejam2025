@@ -19,15 +19,18 @@ public class ResourceManager : MonoBehaviour
         public int water = 30;
         public int food = 30;
         public int pop = 3;
+        public int availablePop = 3;
+        public int maxPop = 5;
         public int power = 3;
+        public int powerExpense = 0;
         public int techPoint = 15;
         public int maxBuildLevel = 3;
 
-        public float oreIncome = 1f;
-        public float waterIncome = 1f;
-        public float foodIncome = 1f;
+        public int oreIncome = 0;
+        public int waterIncome = 0;
+        public int foodIncome = 0;
         public float popIncome = 0.1f;
-        public float powerIncome = 0.5f;
+        public int powerIncome = 0;
         public float techPointIncome = 0.2f;
         public HashSet<string> unlockedTechs = new HashSet<string>();
 
@@ -50,16 +53,49 @@ public class ResourceManager : MonoBehaviour
             return unlockedTechs.Contains(techId);
         }
 
+        public int calculateExpenses(string fieldname)
+        {
+
+            switch (fieldname)
+            {
+                case ("food"):
+                    return pop;
+                case ("power"):
+                    return powerExpense;
+                case ("water"):
+                    return pop;
+
+                default:
+                    return 0;
+            }
+        }
+
         public void UnlockTech(string techId)
         {
             unlockedTechs.Add(techId);
         }
-        public float GetIncome(string fieldName)
+
+        public bool AssingWorker(int number)
         {
-            return (float)typeof(PlayerResources).GetField(fieldName + "Income").GetValue(this);
+
+            if (availablePop > 0 && number > 0)
+            {
+                availablePop -= number;
+                return true;
+            }
+            else if (number < 0)
+            {
+                availablePop += number;
+                return true;
+            }
+            return false;
+        }
+        public int GetIncome(string fieldName)
+        {
+            return (int)typeof(PlayerResources).GetField(fieldName + "Income").GetValue(this);
         }
     }
-    private string[] resourceTypes = { "ore", "water", "food", "pop", "power", "techPoint" };
+    private string[] resourceTypes = { "ore", "water", "food", "power"};
     public float updateInterval = 5f; // update every 1 second
     private float timer = 0f;
 
@@ -94,14 +130,19 @@ public class ResourceManager : MonoBehaviour
     {
         for (int i = 1; i <= 2; i++)
         {
+                        Debug.Log(players[i].powerExpense);
+
             foreach (var res in resourceTypes)
             {
-                int amount = Mathf.FloorToInt(players[i].GetIncome(res));
-                players[i][res] += amount;
+
+                int amount = players[i].GetIncome(res);
+                int expenses = players[i].calculateExpenses(res);
+                players[i][res] += amount - expenses;
             }
+
             spawnerP1.TriggerSpawn();
             spawnerP2.TriggerSpawn();
-           // spawner.difficultyLevel++;
+            // spawner.difficultyLevel++;
         }
 
     }

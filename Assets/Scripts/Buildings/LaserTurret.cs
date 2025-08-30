@@ -17,16 +17,10 @@ public class LaserTurret : Building
 
     private float fireCooldown = 0f;
 
-    protected override void NewAwake()
-    {
-        base.NewAwake();
-        ApplyUpgradeEffects();
-    }
-
     protected override void NewUpdate()
     {
         base.NewAwake();
-        if (!CanShoot() | currentLevel < 1 )
+        if (!CanShoot() | currentLevel < 1)
             return;
 
         fireCooldown -= Time.deltaTime;
@@ -85,19 +79,12 @@ public class LaserTurret : Building
         }
     }
 
-
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, range);
-    }
-
-    protected override void ApplyUpgradeEffects()
+    protected override void ApplyUpgradeEffects(int upg)
     {
         range = 10 + currentLevel * 2;
         damage = 2 + currentLevel * 2;
         fireRate = 0.5f * currentLevel;
 
+        owner.powerExpense += 1 * upg;
     }
 }
