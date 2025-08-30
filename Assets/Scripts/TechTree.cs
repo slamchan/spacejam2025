@@ -1,11 +1,10 @@
 using UnityEngine;
 using System.Collections.Generic;
-using System.Collections;
 
 public class TechTree
 {
     private Dictionary<string, TechNode> nodes = new Dictionary<string, TechNode>();
-    public ArrayList roots = new ArrayList();
+    public List<TechNode> roots = new List<TechNode>();
 
     public TechNode AddNode(string idPrefix, string name, int baseCost = 0, string parentId = null)
     {
@@ -21,8 +20,7 @@ public class TechTree
             newBaseCost = parentNode.baseCost;
         }
 
-        string newId = idPrefix + level;
-        TechNode node = new TechNode(newId, name, newCost, newBaseCost, level);
+        TechNode node = new TechNode(idPrefix, name, newCost, newBaseCost, level);
 
         if (parentNode != null)
         {
@@ -33,7 +31,7 @@ public class TechTree
             roots.Add(node);
         }
 
-        nodes[newId] = node;
+        nodes[idPrefix + level] = node;
         return node;
     }
 

@@ -5,6 +5,7 @@ using System.Reflection;
 public class TechNode
 {
     public string id;
+    public string idPrefix;
     public string name;
     public int cost;
     public int baseCost;
@@ -15,6 +16,7 @@ public class TechNode
     public TechNode(string id, string name, int cost, int baseCost, int level)
     {
         this.id = id + level;
+        this.idPrefix = id;
         this.name = name;
         this.cost = cost;
         this.baseCost = baseCost;
