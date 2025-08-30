@@ -51,9 +51,7 @@ public class Research : Building
         TextInfo textInfo = CultureInfo.InvariantCulture.TextInfo;
         List<TechLevel> selectedTechPaths = upgradePaths[selectedTechIndex];
         TechLevel selectedTech = selectedTechPaths[selectedTechPaths.Count - 1];
-        Debug.Log(selectedTech.tech.name);
-        Debug.Log(selectedTech.resType);
-        Debug.Log(selectedTech.resCost);
+
         selectedTechText.text = $"{selectedTech.tech.name} level {selectedTech.tech.level}\n{selectedTech.resType}: {selectedTech.resCost}";
         selectedTechText.gameObject.SetActive(true);
     }

@@ -36,7 +36,7 @@ public class SoundManager : MonoBehaviour
         musicAudioSource = gameObject.AddComponent<AudioSource>();
         musicAudioSource.clip = backgroundMusic;
         musicAudioSource.loop = true;
-        musicAudioSource.Play(); // Start playing background music
+       // musicAudioSource.Play(); // Start playing background music
 
         // Find or create the sound effect AudioSource (for one-time sounds)
         soundEffectAudioSource = gameObject.AddComponent<AudioSource>();
