@@ -6,40 +6,35 @@ public class Building : MonoBehaviour
 {
 
     [System.Serializable]
-    public class UpgradeEffect
-    {
-        public string resourceType; // check TODO POSSIBLE EFFECTS
-        public int amount;          // e.g. +10
-    }
-
-
-    [System.Serializable]
     public class UpgradeLevel
     {
         public int resCost;
         public string resType;
         public int requiredBuildLevel;
-        public UpgradeEffect[] effects;  // instead of powerGain
-
         public Sprite sprite;
     }
 
     public int ownerPlayerId = 1;
     public int currentLevel = 0;
+    protected int buildingHp = 2;
+    protected int buildingMaxHp = 2;
     public UpgradeLevel[] upgradePath;
 
-    private SpriteRenderer spriteRenderer; // Assign in Inspector
+    protected SpriteRenderer spriteRenderer; // Assign in Inspector
 
-    private int playerOnTopPlayerId = 0;
+    protected int playerOnTopPlayerId = 0;
 
-    private bool playerOnTop = false;
+    protected bool playerOnTop = false;
+
+    public string buildingName;
 
 
     public TMP_Text upgradeCostText; // assign in Inspector
 
 
-    private void Update()
+    protected void Update()
     {
+        NewUpdate();
         if (playerOnTop)
         {
             ShowUpgradeCost();
@@ -61,33 +56,51 @@ public class Building : MonoBehaviour
         }
     }
 
-    private void ShowUpgradeCost()
+
+    // Make these virtual so child classes can extend them
+    protected virtual void NewAwake() { }
+    protected virtual void NewUpdate() { }
+    protected void ShowUpgradeCost()
     {
-        var next = upgradePath[currentLevel];
-        if (next != null)
+        if (currentLevel >= upgradePath.Length)
         {
             // Example: assuming next.cost is a PlayerResources-like object
             TextInfo textInfo = CultureInfo.InvariantCulture.TextInfo;
-            upgradeCostText.text = $"{textInfo.ToTitleCase(next.resType)}:{next.resCost}";
+            upgradeCostText.text = $"{buildingName}\nMAX";
             upgradeCostText.gameObject.SetActive(true);
         }
+        else
+        {
+            var next = upgradePath[currentLevel];
+            if (next != null)
+            {
+                // Example: assuming next.cost is a PlayerResources-like object
+                TextInfo textInfo = CultureInfo.InvariantCulture.TextInfo;
+                upgradeCostText.text = $"{buildingName}\n{textInfo.ToTitleCase(next.resType)}:{next.resCost}";
+                upgradeCostText.gameObject.SetActive(true);
+            }
+
+        }
+
+
     }
 
-    private void HideUpgradeCost()
-{
-    if (upgradeCostText != null)
-        upgradeCostText.gameObject.SetActive(false);
-}
-
-
-    private void Awake()
+    protected void HideUpgradeCost()
     {
+        if (upgradeCostText != null)
+            upgradeCostText.gameObject.SetActive(false);
+    }
+
+
+    protected void Awake()
+    {
+        NewAwake();
         if (spriteRenderer == null)
             spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
 
-    private void TryUpgrade()
+    protected void TryUpgrade()
     {
         if (currentLevel >= upgradePath.Length) return;
 
@@ -102,16 +115,7 @@ public class Building : MonoBehaviour
 
         if (ResourceManager.Instance.SpendResources(ownerPlayerId, next.resType, next.resCost))
         {
-            // Apply effect
-            ApplyEffects(next);
-
-            if (next.sprite != null)
-            {
-                spriteRenderer.sprite = next.sprite; // next.sprite is the upgraded sprite
-            }
-            currentLevel += 1;
-
-            Debug.Log($"Player {ownerPlayerId}: Upgraded building to level {currentLevel + 1}");
+            Upgrade(1);
         }
         else
         {
@@ -119,47 +123,42 @@ public class Building : MonoBehaviour
         }
     }
 
-    private void ApplyEffects(UpgradeLevel level)
+    protected virtual void ApplyUpgradeEffects()
     {
-        var owner = ResourceManager.Instance.players[ownerPlayerId];
-
-        foreach (var effect in level.effects)
-        {/*
-        TODO POSSIBLE EFFECTS
-            switch (effect.resourceType.ToLower())
-            {
-            
-                case "power":
-                    owner.resources.power += effect.amount;
-                    break;
-                case "food":
-                    owner.resources.food += effect.amount;
-                    break;
-                case "gold":
-                    owner.resources.gold += effect.amount;
-                    break;
-                default:
-                    Debug.LogWarning($"Unknown effect type: {effect.resourceType}");
-                    break;
-            }*/
-        }
     }
 
-
-    private void OnTriggerEnter2D(Collider2D collision)
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
 
-        PlayerController player = collision.GetComponent<PlayerController>();
-        Debug.Log($"{player}");
-
-        if (player != null)
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            playerOnTop = true;
-            playerOnTopPlayerId = player.playerId; // 1 or 2
+            PlayerController player = collision.GetComponent<PlayerController>();
+            if (player != null)
+            {
+                playerOnTop = true;
+                playerOnTopPlayerId = player.playerId;
+            }
+        }
+        else
+        {
+            // Handle meteors
+            Meteor meteor = collision.GetComponent<Meteor>();
+            if (meteor != null)
+            {
+                buildingHp -= 1;
+                meteor.TakeDamage(meteor.hp); // or just DestroyMeteor
+                if (buildingHp <= 0 && currentLevel > 0)
+                {
+                    Upgrade(-1);
+
+                }
+                Debug.Log($"Level of the building is {currentLevel}");
+
+            }
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    protected void OnTriggerExit2D(Collider2D collision)
     {
 
         PlayerController player = collision.GetComponent<PlayerController>();
@@ -171,4 +170,23 @@ public class Building : MonoBehaviour
         }
     }
 
+    protected void Upgrade(int upg)
+    {
+        Debug.Log($"Level of the building is {currentLevel}");
+
+        var next = upgradePath[currentLevel];
+
+        if (next.sprite != null)
+        {
+            spriteRenderer.sprite = next.sprite; // next.sprite is the upgraded sprite
+        }
+
+        int HpIncrease = 2;
+        buildingMaxHp = HpIncrease * (currentLevel + 1);
+        buildingHp = buildingMaxHp;
+        ApplyUpgradeEffects();
+        currentLevel = currentLevel + upg;
+
+        Debug.Log($"Player {ownerPlayerId}: Upgraded building to level {currentLevel}");
+    }
 }

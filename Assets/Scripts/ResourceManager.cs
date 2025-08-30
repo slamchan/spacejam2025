@@ -88,6 +88,13 @@ public class ResourceManager : MonoBehaviour
         public int power = 3;
         public int techPoint = 15;
         public int maxBuildLevel = 3;
+
+        public float oreIncome = 1f;
+        public float waterIncome = 1f;
+        public float foodIncome = 1f;
+        public float popIncome = 0.1f;
+        public float powerIncome = 0.5f;
+        public float techPointIncome = 0.2f;
         public HashSet<string> unlockedTechs = new HashSet<string>();
 
         public int this[string fieldName]
@@ -112,6 +119,34 @@ public class ResourceManager : MonoBehaviour
         public void UnlockTech(string techId)
         {
             unlockedTechs.Add(techId);
+        }
+        public float GetIncome(string fieldName)
+        {
+            return (float)typeof(PlayerResources).GetField(fieldName + "Income").GetValue(this);
+        }
+    }
+    private string[] resourceTypes = { "ore", "water", "food", "pop", "power", "techPoint" };
+    public float updateInterval = 5f; // update every 1 second
+    private float timer = 0f;
+    private void Update()
+    {
+        timer += Time.deltaTime;
+        if (timer >= updateInterval)
+        {
+            timer -= updateInterval; // reset timer
+            UpdateResources();
+        }
+    }
+
+    private void UpdateResources()
+    {
+        for (int i = 1; i <= 2; i++)
+        {
+            foreach (var res in resourceTypes)
+            {
+                int amount = Mathf.FloorToInt(players[i].GetIncome(res) * updateInterval);
+                players[i][res] += amount;
+            }
         }
     }
 
@@ -153,5 +188,15 @@ public class ResourceManager : MonoBehaviour
     {
         var res = players[playerId];
         res[resType] += amount;
+    }
+
+    public bool HasEnough(int playerId, string type, int requiredAmount)
+    {
+        var res = players[playerId];
+        if (res[type] >= requiredAmount)
+        {
+            return true;
+        }
+        return false;
     }
 }

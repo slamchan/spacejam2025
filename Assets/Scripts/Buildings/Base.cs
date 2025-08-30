@@ -1,0 +1,137 @@
+using UnityEngine;
+
+[RequireComponent(typeof(CircleCollider2D), typeof(LineRenderer))]
+public class Base : Building
+{
+    [Header("Shield Settings")]
+    public int shieldHP = 100;
+    public int maxShieldHP = 100;
+    public float shieldRadius = 5f;
+
+    private int startingShield = 50;
+
+    [Header("Visualizer")]
+    public LineRenderer shieldRenderer;
+    public int segments = 50;
+
+    private CircleCollider2D shieldCollider;
+
+    private float timeSinceDamage = 0f;
+    public float regenDelay = 30f;
+
+
+
+    protected override void NewAwake()
+    {
+        base.NewAwake();
+        shieldCollider = GetComponent<CircleCollider2D>();
+        shieldCollider.isTrigger = true;
+        shieldCollider.radius = shieldRadius;
+
+        if (shieldRenderer == null)
+            shieldRenderer = GetComponent<LineRenderer>();
+
+        shieldRenderer.positionCount = segments + 1;
+        shieldRenderer.loop = true;
+        shieldRenderer.useWorldSpace = false;
+        shieldRenderer.widthMultiplier = 0.05f;
+        ApplyUpgradeEffects();
+        DrawShield();
+        UpdateShieldStatus();
+
+    }
+    protected override void NewUpdate()
+    {
+        base.NewUpdate();
+        if (shieldHP <= 0)
+        {
+            timeSinceDamage += Time.deltaTime;
+            if (timeSinceDamage >= regenDelay)
+            {
+                RegenerateShield();
+            }
+        }
+
+        // Update collider and visualizer
+        shieldCollider.radius = shieldRadius;
+        DrawShield();
+    }
+
+
+
+
+    private void RegenerateShield()
+    {
+        shieldHP += maxShieldHP;
+
+        if (shieldHP > 0)
+        {
+            UpdateShieldStatus(); // re-enable shield
+            timeSinceDamage = 0f; // reset timer
+        }
+    }
+
+    protected void DrawShield()
+    {
+        float angleStep = 360f / segments;
+        for (int i = 0; i <= segments; i++)
+        {
+            float angle = i * angleStep * Mathf.Deg2Rad;
+            Vector3 pos = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) * shieldRadius;
+            shieldRenderer.SetPosition(i, pos);
+        }
+    }
+
+    protected void UpdateShieldStatus()
+    {
+        bool isActive = shieldHP > 0;
+        if (shieldRenderer != null) shieldRenderer.enabled = isActive;
+        if (shieldCollider != null) shieldCollider.enabled = isActive;
+    }
+
+    public void TakeDamage(int dmg)
+    {
+        shieldHP -= dmg;
+        if (shieldHP <= 0)
+        {
+            shieldHP = 0;
+            UpdateShieldStatus();
+            Debug.Log("Base shield destroyed!");
+        }
+    }
+
+    protected override void OnTriggerEnter2D(Collider2D collision)
+    {
+        // Only respond if the trigger belongs to the BoxCollider2D for player detection
+        if (collision.IsTouching(GetComponent<BoxCollider2D>()))
+        {
+            PlayerController player = collision.GetComponent<PlayerController>();
+            if (player != null)
+            {
+                playerOnTop = true;
+                playerOnTopPlayerId = player.playerId;
+            }
+        }
+        else
+        {
+            // Handle meteors
+            Meteor meteor = collision.GetComponent<Meteor>();
+            if (meteor != null)
+            {
+                TakeDamage(meteor.power);
+                meteor.TakeDamage(meteor.hp); // or just DestroyMeteor
+            }
+        }
+    }
+
+
+
+    protected override void ApplyUpgradeEffects()
+    {
+
+        maxShieldHP = currentLevel * startingShield;
+        shieldHP += startingShield;
+
+    }
+
+}
