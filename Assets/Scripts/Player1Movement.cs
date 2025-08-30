@@ -1,8 +1,8 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Player1Movement : MonoBehaviour
 {
+    //movement
     public float moveSpeed = 5f;
     public float jumpForce = 10f;
     private Rigidbody2D rb;
@@ -11,7 +11,7 @@ public class Player1Movement : MonoBehaviour
     public Transform groundCheck;
     public float groundCheckRadius = 0.2f;
     public LayerMask groundLayer;
-
+    //minimap
     [Header("UI Elements")]
     public RectTransform mapImage;    // The minimap background
     public RectTransform playerIcon;  // The player’s dot

@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Player2Movement : MonoBehaviour
 {
+    //movement
     public float moveSpeed = 5f;
     public float jumpForce = 10f;
     private Rigidbody2D rb2;
@@ -10,7 +11,7 @@ public class Player2Movement : MonoBehaviour
     public Transform groundCheck;
     public float groundCheckRadius = 0.2f;
     public LayerMask groundLayer;
-
+    //minimap
     [Header("UI Elements")]
     public RectTransform mapImage;    // The minimap background
     public RectTransform playerIcon;  // The player’s dot
@@ -22,7 +23,7 @@ public class Player2Movement : MonoBehaviour
     public float halfWorldWidth = 10f;   // match LoopingWorld
     public float halfWorldHeight = 5f;   // set to 0 if no vertical looping
 
-    void Start()
+     void Start()
     {
         rb2 = GetComponent<Rigidbody2D>();
     }
