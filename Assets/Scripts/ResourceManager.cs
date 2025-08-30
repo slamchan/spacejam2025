@@ -107,20 +107,10 @@ public class ResourceManager : MonoBehaviour
     private float timer = 0f;
 
     [Header("Player 1 UI")]
-    public TMP_Text p1OreText;
-    public TMP_Text p1WaterText;
-    public TMP_Text p1FoodText;
-    public TMP_Text p1PopText;
-    public TMP_Text p1PowerText;
-    public TMP_Text p1TechText;
+    public TMP_Text p1StatsText;
 
     [Header("Player 2 UI")]
-    public TMP_Text p2OreText;
-    public TMP_Text p2WaterText;
-    public TMP_Text p2FoodText;
-    public TMP_Text p2PopText;
-    public TMP_Text p2PowerText;
-    public TMP_Text p2TechText;
+    public TMP_Text p2StatsText;
 
     private void Update()
     {
@@ -222,19 +212,22 @@ public class ResourceManager : MonoBehaviour
     private void UpdateUI()
     {
         // P1
-        p1OreText.text = "O: " + players[1]["ore"];
-        p1WaterText.text = "W: " + players[1]["water"];
-        p1FoodText.text = "F: " + players[1]["food"];
-        p1PopText.text = "P: " + players[1]["availablePop"];
-        p1PowerText.text = "Pwr: " + players[1]["power"];
-        p1TechText.text = "Tech: " + players[1]["techPoint"];
+        p1StatsText.text =
+        "O: " + players[1]["ore"] + "\n" +
+        "W: " + players[1]["water"] + "\n" +
+        "F: " + players[1]["food"] + "\n" +
+        "P: " + players[1]["availablePop"] + "\n" +
+        "Pwr: " + players[1]["power"] + "\n" +
+        "Tech: " + players[1]["techPoint"];
+
 
         // P2
-        p2OreText.text = "O: " + players[2]["ore"];
-        p2WaterText.text = "W: " + players[2]["water"];
-        p2FoodText.text = "F: " + players[2]["food"];
-        p2PopText.text = "P: " + players[2]["availablePop"];
-        p2PowerText.text = "Pwr: " + players[2]["power"];
-        p2TechText.text = "Tech: " + players[2]["techPoint"];
+        p2StatsText.text =
+        "O: " + players[2]["ore"] + "\n" +
+        "W: " + players[2]["water"] + "\n" +
+        "F: " + players[2]["food"] + "\n" +
+        "P: " + players[2]["availablePop"] + "\n" +
+        "Pwr: " + players[2]["power"] + "\n" +
+        "Tech: " + players[2]["techPoint"];
     }
 }
