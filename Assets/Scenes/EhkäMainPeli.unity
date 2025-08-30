@@ -2737,6 +2737,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DayNightCycle
   mainCamera: {fileID: 1851251358}
+  camera2: {fileID: 1550463158}
+  camera3: {fileID: 1488380013}
   dayColor: {r: 0, g: 0, b: 1, a: 1}
   nightColor: {r: 0, g: 0, b: 0, a: 1}
   cycleDuration: 30
@@ -3886,9 +3888,9 @@ SceneRoots:
   - {fileID: 1732185079}
   - {fileID: 939537838}
   - {fileID: 1550463159}
+  - {fileID: 1488380014}
   - {fileID: 708702014}
   - {fileID: 1550417347}
-  - {fileID: 1488380014}
   - {fileID: 1764897782}
   - {fileID: 2117968693}
   - {fileID: 1458933419}
