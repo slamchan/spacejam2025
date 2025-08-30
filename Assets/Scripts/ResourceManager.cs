@@ -10,8 +10,6 @@ public class ResourceManager : MonoBehaviour
     public MeteorSpawner spawnerP1;
     public MeteorSpawner spawnerP2;
 
-
-
     [System.Serializable]
     public class PlayerResources
     {
@@ -22,10 +20,18 @@ public class ResourceManager : MonoBehaviour
         public int availablePop = 3;
         public int maxPop = 5;
         public int power = 3;
-        public int techPoint = 17;
+        public int techPoint = 15;
         public int powerExpense = 0;
         public int maxBuildLevel = 3;
         public bool hasResearchCenter = false;
+
+
+
+        public int oreMod = 4;
+        public int foodMod = 6;
+        public int powerMod = 3;
+        public int waterMod = 4;
+
 
         public int oreIncome = 0;
         public int waterIncome = 0;
@@ -96,7 +102,7 @@ public class ResourceManager : MonoBehaviour
             return (int)typeof(PlayerResources).GetField(fieldName + "Income").GetValue(this);
         }
     }
-    private string[] resourceTypes = { "ore", "water", "food", "power"};
+    private string[] resourceTypes = { "ore", "water", "food", "power" };
     public float updateInterval = 5f; // update every 1 second
     private float timer = 0f;
 
@@ -118,12 +124,12 @@ public class ResourceManager : MonoBehaviour
 
     private void Update()
     {
+        UpdateUI();
         timer += Time.deltaTime;
         if (timer >= updateInterval)
         {
             timer -= updateInterval; // reset timer
             UpdateResources();
-            UpdateUI();
         }
     }
 
@@ -131,8 +137,6 @@ public class ResourceManager : MonoBehaviour
     {
         for (int i = 1; i <= 2; i++)
         {
-                        Debug.Log(players[i].powerExpense);
-
             foreach (var res in resourceTypes)
             {
 
@@ -161,8 +165,7 @@ public class ResourceManager : MonoBehaviour
         players[2] = new PlayerResources();
         UpdateUI();
         // Build a simple tree
-        TechTree techTree = new TechTree();
-        TechNode techNode;
+        TechTree techTree = new TechTree(); TechNode techNode;
         // Try researching
         bool success1 = techTree.ResearchTech(players[1], "oreDrillMaxLevel", 1);
         techNode = techTree.GetNode("oreDrillMaxLevel", 1);
@@ -219,19 +222,19 @@ public class ResourceManager : MonoBehaviour
     private void UpdateUI()
     {
         // P1
-        p1OreText.text = "Ore: " + players[1]["ore"];
-        p1WaterText.text = "Water: " + players[1]["water"];
-        p1FoodText.text = "Food: " + players[1]["food"];
-        p1PopText.text = "Pop: " + players[1]["pop"];
-        p1PowerText.text = "Power: " + players[1]["power"];
+        p1OreText.text = "O: " + players[1]["ore"];
+        p1WaterText.text = "W: " + players[1]["water"];
+        p1FoodText.text = "F: " + players[1]["food"];
+        p1PopText.text = "P: " + players[1]["availablePop"];
+        p1PowerText.text = "Pwr: " + players[1]["power"];
         p1TechText.text = "Tech: " + players[1]["techPoint"];
 
         // P2
-        p2OreText.text = "Ore: " + players[2]["ore"];
-        p2WaterText.text = "Water: " + players[2]["water"];
-        p2FoodText.text = "Food: " + players[2]["food"];
-        p2PopText.text = "Pop: " + players[2]["pop"];
-        p2PowerText.text = "Power: " + players[2]["power"];
+        p2OreText.text = "O: " + players[2]["ore"];
+        p2WaterText.text = "W: " + players[2]["water"];
+        p2FoodText.text = "F: " + players[2]["food"];
+        p2PopText.text = "P: " + players[2]["availablePop"];
+        p2PowerText.text = "Pwr: " + players[2]["power"];
         p2TechText.text = "Tech: " + players[2]["techPoint"];
     }
 }
