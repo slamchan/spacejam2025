@@ -9,7 +9,6 @@ public class LaserTurret : Building
 
     [Header("Resource Costs")]
     public int powerRequired = 1;
-    public int manpowerRequired = 1;
 
     [Header("References")]
     public Transform firePoint;
@@ -37,9 +36,8 @@ public class LaserTurret : Building
     private bool CanShoot()
     {
         {
-            return ResourceManager.Instance.HasEnough(ownerPlayerId, "power", powerRequired) &&
-                   ResourceManager.Instance.HasEnough(ownerPlayerId, "pop", manpowerRequired);
-        }
+            return ResourceManager.Instance.HasEnough(ownerPlayerId, "power", powerRequired) && currentWorkers > 1;
+         }
     }
 
     private Meteor FindNearestMeteor()
@@ -91,8 +89,6 @@ public class LaserTurret : Building
                 range += 10f + currentWorkers * 2f;
                 damage += 2 + currentWorkers * 2;
                 fireRate += 0.5f * currentWorkers + 1f;
-
-                Debug.Log($"Assigned {upg} worker(s) to this building.");
             }
         }
     }

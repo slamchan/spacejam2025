@@ -412,5 +412,5 @@ MonoBehaviour:
     resType: ore
     requiredBuildLevel: 0
     sprite: {fileID: -4178046375966092550, guid: 18bebd0961a0b554594c2d021a5f17b9, type: 3}
-  buildingName: IceDrill
+  buildingName: Powerplant
   upgradeCostText: {fileID: 5479182541664036033}

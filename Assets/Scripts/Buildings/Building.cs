@@ -91,7 +91,7 @@ public class Building : MonoBehaviour
         if (currentLevel >= upgradePath.Length - 1)
         {
             TextInfo textInfo = CultureInfo.InvariantCulture.TextInfo;
-            upgradeCostText.text = $"{buildingName}\nMAX";
+            upgradeCostText.text = $"{buildingName}\nMAX\n{currentWorkers}/{currentLevel}";
             upgradeCostText.gameObject.SetActive(true);
         }
         else
@@ -100,7 +100,7 @@ public class Building : MonoBehaviour
             if (next != null)
             {
                 TextInfo textInfo = CultureInfo.InvariantCulture.TextInfo;
-                upgradeCostText.text = $"{buildingName}\n{textInfo.ToTitleCase(next.resType)}:{next.resCost}";
+                upgradeCostText.text = $"{buildingName}\n{textInfo.ToTitleCase(next.resType)}:{next.resCost}\n{currentWorkers}/{currentLevel} ";
                 upgradeCostText.gameObject.SetActive(true);
             }
         }
