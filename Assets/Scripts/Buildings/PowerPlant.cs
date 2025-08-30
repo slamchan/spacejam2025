@@ -6,6 +6,6 @@ public class PowerPlant : Building
     protected override void ApplyUpgradeEffects()
     {
         var owner = ResourceManager.Instance.players[ownerPlayerId];
-        owner.powerIncome += 0.2f * (currentLevel + 1);
+        owner.powerIncome += 2.2f * (currentLevel + 1);
     }
 }

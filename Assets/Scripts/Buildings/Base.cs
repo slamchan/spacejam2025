@@ -151,6 +151,7 @@ public class Base : Building
     {
         base.ApplyUpgradeEffects();
         maxShieldHP = currentLevel * startingShield;
+        shieldRadius = 5f+currentLevel * 2f;
         if (maxShieldHP > shieldHP)
         {
             shieldHP += startingShield;

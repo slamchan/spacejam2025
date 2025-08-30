@@ -7,6 +7,8 @@ public class ResourceManager : MonoBehaviour
 {
     public static ResourceManager Instance;
 
+    public MeteorSpawner spawner;
+
     public class TechNode
     {
         public string id;
@@ -164,10 +166,13 @@ public class ResourceManager : MonoBehaviour
         {
             foreach (var res in resourceTypes)
             {
-                int amount = Mathf.FloorToInt(players[i].GetIncome(res) * updateInterval);
+                int amount = Mathf.FloorToInt(players[i].GetIncome(res));
                 players[i][res] += amount;
             }
+            spawner.TriggerSpawn();
+           // spawner.difficultyLevel++;
         }
+
     }
 
 
@@ -220,21 +225,21 @@ public class ResourceManager : MonoBehaviour
         return false;
     }
     private void UpdateUI()
-{
-    // P1
-    p1OreText.text   = "Ore: "   + players[1]["ore"];
-    p1WaterText.text = "Water: " + players[1]["water"];
-    p1FoodText.text  = "Food: "  + players[1]["food"];
-    p1PopText.text   = "Pop: "   + players[1]["pop"];
-    p1PowerText.text = "Power: " + players[1]["power"];
-    p1TechText.text  = "Tech: "  + players[1]["techPoint"];
+    {
+        // P1
+        p1OreText.text = "Ore: " + players[1]["ore"];
+        p1WaterText.text = "Water: " + players[1]["water"];
+        p1FoodText.text = "Food: " + players[1]["food"];
+        p1PopText.text = "Pop: " + players[1]["pop"];
+        p1PowerText.text = "Power: " + players[1]["power"];
+        p1TechText.text = "Tech: " + players[1]["techPoint"];
 
-    // P2
-    p2OreText.text   = "Ore: "   + players[2]["ore"];
-    p2WaterText.text = "Water: " + players[2]["water"];
-    p2FoodText.text  = "Food: "  + players[2]["food"];
-    p2PopText.text   = "Pop: "   + players[2]["pop"];
-    p2PowerText.text = "Power: " + players[2]["power"];
-    p2TechText.text  = "Tech: "  + players[2]["techPoint"];
-}
+        // P2
+        p2OreText.text = "Ore: " + players[2]["ore"];
+        p2WaterText.text = "Water: " + players[2]["water"];
+        p2FoodText.text = "Food: " + players[2]["food"];
+        p2PopText.text = "Pop: " + players[2]["pop"];
+        p2PowerText.text = "Power: " + players[2]["power"];
+        p2TechText.text = "Tech: " + players[2]["techPoint"];
+    }
 }
