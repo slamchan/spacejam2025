@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
+using TMPro;
+
 
 public class ResourceManager : MonoBehaviour
 {
@@ -128,6 +130,23 @@ public class ResourceManager : MonoBehaviour
     private string[] resourceTypes = { "ore", "water", "food", "pop", "power", "techPoint" };
     public float updateInterval = 5f; // update every 1 second
     private float timer = 0f;
+
+    [Header("Player 1 UI")]
+    public TMP_Text p1OreText;
+    public TMP_Text p1WaterText;
+    public TMP_Text p1FoodText;
+    public TMP_Text p1PopText;
+    public TMP_Text p1PowerText;
+    public TMP_Text p1TechText;
+
+    [Header("Player 2 UI")]
+    public TMP_Text p2OreText;
+    public TMP_Text p2WaterText;
+    public TMP_Text p2FoodText;
+    public TMP_Text p2PopText;
+    public TMP_Text p2PowerText;
+    public TMP_Text p2TechText;
+
     private void Update()
     {
         timer += Time.deltaTime;
@@ -135,6 +154,7 @@ public class ResourceManager : MonoBehaviour
         {
             timer -= updateInterval; // reset timer
             UpdateResources();
+            UpdateUI();
         }
     }
 
@@ -161,7 +181,7 @@ public class ResourceManager : MonoBehaviour
         // init 2 players
         players[1] = new PlayerResources();
         players[2] = new PlayerResources();
-
+        UpdateUI();
         // Build a simple tree
         TechTree techTree = new TechTree();
         techTree.AddNode("buildingLevel1", "Upgrade max building level 1", 1);
@@ -199,4 +219,22 @@ public class ResourceManager : MonoBehaviour
         }
         return false;
     }
+    private void UpdateUI()
+{
+    // P1
+    p1OreText.text   = "Ore: "   + players[1]["ore"];
+    p1WaterText.text = "Water: " + players[1]["water"];
+    p1FoodText.text  = "Food: "  + players[1]["food"];
+    p1PopText.text   = "Pop: "   + players[1]["pop"];
+    p1PowerText.text = "Power: " + players[1]["power"];
+    p1TechText.text  = "Tech: "  + players[1]["techPoint"];
+
+    // P2
+    p2OreText.text   = "Ore: "   + players[2]["ore"];
+    p2WaterText.text = "Water: " + players[2]["water"];
+    p2FoodText.text  = "Food: "  + players[2]["food"];
+    p2PopText.text   = "Pop: "   + players[2]["pop"];
+    p2PowerText.text = "Power: " + players[2]["power"];
+    p2TechText.text  = "Tech: "  + players[2]["techPoint"];
+}
 }
