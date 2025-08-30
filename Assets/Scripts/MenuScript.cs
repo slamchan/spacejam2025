@@ -68,8 +68,11 @@ public class MenuScript : MonoBehaviour
         Debug.Log("QuitGame() called - Application.Quit() doesn't work in the editor.");
         Application.Quit();
     }
-
-
+    public void OnMenuButtonClick()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+    
     private void PlaySound(AudioClip clip)
     {
         if (audioSource != null && clip != null)
