@@ -3,7 +3,7 @@ using UnityEngine;
 public class LaserTurret : Building
 {
     [Header("Turret Stats")]
-    public float range = 5f;
+    public float range = 10f;
     public float fireRate = 1f;
     public int damage = 10;
 
@@ -17,10 +17,16 @@ public class LaserTurret : Building
 
     private float fireCooldown = 0f;
 
+    protected override void NewAwake()
+    {
+        base.NewAwake();
+        ApplyUpgradeEffects();
+    }
+
     protected override void NewUpdate()
     {
         base.NewAwake();
-        if (!CanShoot())
+        if (!CanShoot() | currentLevel < 1 )
             return;
 
         fireCooldown -= Time.deltaTime;
@@ -37,7 +43,7 @@ public class LaserTurret : Building
     private bool CanShoot()
     {
         {
-            return ResourceManager.Instance.HasEnough(ownerPlayerId,"power", powerRequired) &&
+            return ResourceManager.Instance.HasEnough(ownerPlayerId, "power", powerRequired) &&
                    ResourceManager.Instance.HasEnough(ownerPlayerId, "pop", manpowerRequired);
         }
     }
@@ -64,20 +70,20 @@ public class LaserTurret : Building
         return closest;
     }
 
-private void Shoot(Meteor target)
-{
-    if (laserPrefab == null || firePoint == null) return;
-
-    // make a new instance (clone)
-    GameObject laserInstance = Instantiate(laserPrefab, firePoint.position, Quaternion.identity);
-
-    // get projectile component
-    LaserProjectile proj = laserInstance.GetComponent<LaserProjectile>();
-    if (proj != null)
+    private void Shoot(Meteor target)
     {
-        proj.Init(target.transform, damage);
+        if (laserPrefab == null || firePoint == null) return;
+
+        // make a new instance (clone)
+        GameObject laserInstance = Instantiate(laserPrefab, firePoint.position, Quaternion.identity);
+
+        // get projectile component
+        LaserProjectile proj = laserInstance.GetComponent<LaserProjectile>();
+        if (proj != null)
+        {
+            proj.Init(target.transform, damage);
+        }
     }
-}
 
 
 
@@ -85,5 +91,13 @@ private void Shoot(Meteor target)
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, range);
+    }
+
+    protected override void ApplyUpgradeEffects()
+    {
+        range = 10 + currentLevel * 2;
+        damage = 2 + currentLevel * 2;
+        fireRate = 0.5f * currentLevel;
+
     }
 }

@@ -105,11 +105,31 @@ public class Base : Building
         // Only respond if the trigger belongs to the BoxCollider2D for player detection
         if (collision.IsTouching(GetComponent<BoxCollider2D>()))
         {
-            PlayerController player = collision.GetComponent<PlayerController>();
-            if (player != null)
+            if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
             {
-                playerOnTop = true;
-                playerOnTopPlayerId = player.playerId;
+                PlayerController player = collision.GetComponent<PlayerController>();
+                if (player != null)
+                {
+                    playerOnTop = true;
+                    playerOnTopPlayerId = player.playerId;
+                }
+            }
+            else
+            {
+                // Handle meteors
+                Meteor meteor = collision.GetComponent<Meteor>();
+                if (meteor != null)
+                {
+                    buildingHp -= 1;
+                    meteor.TakeDamage(meteor.hp); // or just DestroyMeteor
+                    if (buildingHp <= 0 && currentLevel > 0)
+                    {
+                        Upgrade(-1);
+
+                    }
+                    Debug.Log($"Level of the building is {currentLevel}");
+
+                }
             }
         }
         else
@@ -118,6 +138,7 @@ public class Base : Building
             Meteor meteor = collision.GetComponent<Meteor>();
             if (meteor != null)
             {
+
                 TakeDamage(meteor.power);
                 meteor.TakeDamage(meteor.hp); // or just DestroyMeteor
             }
@@ -128,9 +149,17 @@ public class Base : Building
 
     protected override void ApplyUpgradeEffects()
     {
-
+        base.ApplyUpgradeEffects();
         maxShieldHP = currentLevel * startingShield;
-        shieldHP += startingShield;
+        if (maxShieldHP > shieldHP)
+        {
+            shieldHP += startingShield;
+        }
+        else
+        {
+            shieldHP = maxShieldHP;
+        }
+        UpdateShieldStatus();
 
     }
 

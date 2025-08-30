@@ -62,7 +62,7 @@ public class Building : MonoBehaviour
     protected virtual void NewUpdate() { }
     protected void ShowUpgradeCost()
     {
-        if (currentLevel >= upgradePath.Length)
+        if (currentLevel >= upgradePath.Length-1)
         {
             // Example: assuming next.cost is a PlayerResources-like object
             TextInfo textInfo = CultureInfo.InvariantCulture.TextInfo;
@@ -102,7 +102,7 @@ public class Building : MonoBehaviour
 
     protected void TryUpgrade()
     {
-        if (currentLevel >= upgradePath.Length) return;
+        if (currentLevel >= upgradePath.Length-1) return;
 
         var next = upgradePath[currentLevel];
         var res = ResourceManager.Instance.players[ownerPlayerId];
@@ -173,6 +173,7 @@ public class Building : MonoBehaviour
     protected void Upgrade(int upg)
     {
         Debug.Log($"Level of the building is {currentLevel}");
+        currentLevel = currentLevel + upg;
 
         var next = upgradePath[currentLevel];
 
@@ -181,11 +182,10 @@ public class Building : MonoBehaviour
             spriteRenderer.sprite = next.sprite; // next.sprite is the upgraded sprite
         }
 
-        int HpIncrease = 2;
+        int HpIncrease = 1;
         buildingMaxHp = HpIncrease * (currentLevel + 1);
         buildingHp = buildingMaxHp;
         ApplyUpgradeEffects();
-        currentLevel = currentLevel + upg;
 
         Debug.Log($"Player {ownerPlayerId}: Upgraded building to level {currentLevel}");
     }

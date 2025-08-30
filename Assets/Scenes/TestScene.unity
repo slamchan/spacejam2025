@@ -1108,6 +1108,11 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  mapImage: {fileID: 0}
+  playerIcon: {fileID: 0}
+  player: {fileID: 0}
+  halfWorldWidth: 10
+  halfWorldHeight: 5
 --- !u!114 &1154614160
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1314,6 +1319,11 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  mapImage: {fileID: 0}
+  playerIcon: {fileID: 0}
+  player: {fileID: 0}
+  halfWorldWidth: 10
+  halfWorldHeight: 5
 --- !u!50 &1257032831
 Rigidbody2D:
   serializedVersion: 5
@@ -1747,7 +1757,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -855298285791758126, guid: b24f20d0bf29c1c49bd0ceabc4654fc4, type: 3}
+  m_Sprite: {fileID: 5088316998373936774, guid: bd39e90b7a28bd148aa45a40f40b4521, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1773,23 +1783,23 @@ MonoBehaviour:
   ownerPlayerId: 1
   currentLevel: 0
   upgradePath:
-  - resCost: 0
+  - resCost: 1
     resType: ore
     requiredBuildLevel: 0
     sprite: {fileID: 5088316998373936774, guid: bd39e90b7a28bd148aa45a40f40b4521, type: 3}
-  - resCost: 0
+  - resCost: 2
     resType: ore
     requiredBuildLevel: 0
     sprite: {fileID: -855298285791758126, guid: b24f20d0bf29c1c49bd0ceabc4654fc4, type: 3}
-  - resCost: 0
+  - resCost: 3
     resType: ore
     requiredBuildLevel: 0
     sprite: {fileID: 6937817954938267909, guid: 9b92a796865ceeb489871a28dfda1879, type: 3}
-  - resCost: 0
+  - resCost: 4
     resType: ore
     requiredBuildLevel: 0
     sprite: {fileID: -6470460504253458178, guid: 8f5beea1e07698949b5ff9db884bd05e, type: 3}
-  - resCost: 0
+  - resCost: 5
     resType: ore
     requiredBuildLevel: 0
     sprite: {fileID: -4178046375966092550, guid: 18bebd0961a0b554594c2d021a5f17b9, type: 3}
@@ -2298,7 +2308,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -855298285791758126, guid: b24f20d0bf29c1c49bd0ceabc4654fc4, type: 3}
+  m_Sprite: {fileID: 5088316998373936774, guid: bd39e90b7a28bd148aa45a40f40b4521, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2346,9 +2356,9 @@ MonoBehaviour:
     sprite: {fileID: -4178046375966092550, guid: 18bebd0961a0b554594c2d021a5f17b9, type: 3}
   buildingName: Laser turret
   upgradeCostText: {fileID: 1976241828}
-  range: 1
-  fireRate: 1
-  damage: 10
+  range: 0
+  fireRate: 0
+  damage: 0
   powerRequired: 0
   manpowerRequired: 0
   firePoint: {fileID: 402187342}
@@ -2649,7 +2659,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -855298285791758126, guid: b24f20d0bf29c1c49bd0ceabc4654fc4, type: 3}
+  m_Sprite: {fileID: 5088316998373936774, guid: bd39e90b7a28bd148aa45a40f40b4521, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2675,23 +2685,23 @@ MonoBehaviour:
   ownerPlayerId: 1
   currentLevel: 0
   upgradePath:
-  - resCost: 0
+  - resCost: 1
     resType: ore
     requiredBuildLevel: 0
     sprite: {fileID: 5088316998373936774, guid: bd39e90b7a28bd148aa45a40f40b4521, type: 3}
-  - resCost: 0
+  - resCost: 2
     resType: ore
     requiredBuildLevel: 0
     sprite: {fileID: -855298285791758126, guid: b24f20d0bf29c1c49bd0ceabc4654fc4, type: 3}
-  - resCost: 0
+  - resCost: 3
     resType: ore
     requiredBuildLevel: 0
     sprite: {fileID: 6937817954938267909, guid: 9b92a796865ceeb489871a28dfda1879, type: 3}
-  - resCost: 0
+  - resCost: 4
     resType: ore
     requiredBuildLevel: 0
     sprite: {fileID: -6470460504253458178, guid: 8f5beea1e07698949b5ff9db884bd05e, type: 3}
-  - resCost: 0
+  - resCost: 5
     resType: ore
     requiredBuildLevel: 0
     sprite: {fileID: -4178046375966092550, guid: 18bebd0961a0b554594c2d021a5f17b9, type: 3}
@@ -2827,7 +2837,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -855298285791758126, guid: b24f20d0bf29c1c49bd0ceabc4654fc4, type: 3}
+  m_Sprite: {fileID: 5088316998373936774, guid: bd39e90b7a28bd148aa45a40f40b4521, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
