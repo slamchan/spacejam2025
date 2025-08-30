@@ -41,7 +41,6 @@ public class Research : Building
             List<TechLevel> upgradePath = new List<TechLevel>();
             TechLevel level = new TechLevel(tech);
             upgradePath.Add(level);
-            AddNextTechToPath(upgradePath);
             upgradePaths.Add(upgradePath);
         }
     }
@@ -56,6 +55,32 @@ public class Research : Building
         selectedTechText.gameObject.SetActive(true);
     }
 
+    private void HideSelectedTech()
+    {
+        if (selectedTechText != null)
+        {
+            selectedTechText.gameObject.SetActive(false);
+        }
+    }
+
+    private void ScrollSelection()
+    {
+        selectedTechIndex = (selectedTechIndex + 1) % upgradePaths.Count;
+        ShowSelectedTech();
+    }
+
+    private new void TryUpgrade()
+    {
+        List<TechLevel> selectedTechPaths = upgradePaths[selectedTechIndex];
+        TechLevel selectedTech = selectedTechPaths[selectedTechPaths.Count - 1];
+        ResourceManager.PlayerResources player = ResourceManager.Instance.players[playerOnTopPlayerId];
+        if (techTree.ResearchTech(player, selectedTech.tech.idPrefix, selectedTech.tech.level))
+        {
+            AddNextTechToPath(selectedTechPaths);
+        }
+        Debug.Log(player.techPoint);
+    }
+
 
 
     protected override void NewUpdate()
@@ -66,22 +91,27 @@ public class Research : Building
         {
             ShowSelectedTech();
         }
+        else
+        {
+            HideSelectedTech();
+            return;
+        }
 
         if (playerOnTopPlayerId == 1 && Input.GetKeyDown(KeyCode.W))
         {
-
+            ScrollSelection();
         }
         else if (playerOnTopPlayerId == 2 && Input.GetKeyDown(KeyCode.UpArrow))
         {
-
+            ScrollSelection();
         }
         if (playerOnTopPlayerId == 1 && Input.GetKeyDown(KeyCode.S))
         {
-
+            TryUpgrade();
         }
         else if (playerOnTopPlayerId == 2 && Input.GetKeyDown(KeyCode.DownArrow))
         {
-
+            TryUpgrade();
         }
     }
 }

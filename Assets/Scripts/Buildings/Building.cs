@@ -49,7 +49,6 @@ public class Building : MonoBehaviour
 
         if (playerOnTopPlayerId == 1 && Input.GetKeyDown(KeyCode.S))
         {
-
             TryUpgrade();
         }
         else if (playerOnTopPlayerId == 2 && Input.GetKeyDown(KeyCode.DownArrow))
@@ -199,6 +198,7 @@ public class Building : MonoBehaviour
             {
                 playerOnTop = true;
                 playerOnTopPlayerId = player.playerId;
+                player.canJump = false;
             }
         }
         else
@@ -229,6 +229,7 @@ public class Building : MonoBehaviour
         {
             playerOnTop = false;
             playerOnTopPlayerId = 0;
+            player.canJump = true;
         }
     }
 
