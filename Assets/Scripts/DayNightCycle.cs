@@ -2,7 +2,10 @@ using UnityEngine;
 
 public class DayNightCycle : MonoBehaviour
 {
-    public Camera mainCamera;         // Reference to the Camera
+    public Camera mainCamera;         // Reference to the main Camera
+    public Camera camera2;            // Reference to second Camera
+    public Camera camera3;            // Reference to third Camera
+
     public Color dayColor = Color.blue;  // Color for daytime
     public Color nightColor = Color.black; // Color for nighttime
     public float cycleDuration = 60f; // Duration for one full day-night cycle in seconds
@@ -11,9 +14,12 @@ public class DayNightCycle : MonoBehaviour
 
     void Start()
     {
-        // Set the camera if not manually assigned
+        // Set the cameras if not manually assigned
         if (mainCamera == null)
             mainCamera = Camera.main;
+        // Optionally auto-assign camera2 and camera3 if needed
+        // camera2 = ...;
+        // camera3 = ...;
     }
 
     void Update()
@@ -37,6 +43,13 @@ public class DayNightCycle : MonoBehaviour
         }
 
         // Lerp between day and night colors based on lerpTime
-        mainCamera.backgroundColor = Color.Lerp(nightColor, dayColor, lerpTime);
+        Color currentColor = Color.Lerp(nightColor, dayColor, lerpTime);
+
+        if (mainCamera != null)
+            mainCamera.backgroundColor = currentColor;
+        if (camera2 != null)
+            camera2.backgroundColor = currentColor;
+        if (camera3 != null)
+            camera3.backgroundColor = currentColor;
     }
 }
