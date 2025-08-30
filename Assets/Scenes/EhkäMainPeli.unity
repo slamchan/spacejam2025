@@ -287,7 +287,7 @@ MonoBehaviour:
   meteorPrefab: {fileID: 957853835365102397, guid: 967d967d755d1864898bcd8c7737c43f, type: 3}
   xRange: 8
   ySpawn: 10
-  meteorsPerBurst: 5
+  meteorsPerBurst: 20
   burstInterval: 0.2
   difficultyLevel: 1
   angleRange: 30
@@ -299,12 +299,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 98630216}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.76632, y: 0.62291, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 888967242}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &106202812
 GameObject:
@@ -801,7 +801,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &557898914
 RectTransform:
   m_ObjectHideFlags: 0
@@ -815,11 +815,12 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1769364977}
+  - {fileID: 967624744}
   m_Father: {fileID: 1458933419}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 80, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &708702011
@@ -919,6 +920,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1526666724}
+  - {fileID: 98630218}
   m_Father: {fileID: 1458933419}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1091,7 +1093,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 583e2eff7b58b6448b6769ee33dc6e7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ResourceManager
-  spawner: {fileID: 98630217}
+  spawnerP1: {fileID: 98630217}
+  spawnerP2: {fileID: 967624745}
   updateInterval: 5
   p1OreText: {fileID: 1163217089}
   p1WaterText: {fileID: 1766070165}
@@ -1256,6 +1259,57 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 964578241}
   m_CullTransparentMesh: 1
+--- !u!1 &967624743
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 967624744}
+  - component: {fileID: 967624745}
+  m_Layer: 0
+  m_Name: MeteorSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &967624744
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 967624743}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 557898914}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &967624745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 967624743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bbf59084053fe841bd3899383e87cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MeteorSpawner
+  meteorPrefab: {fileID: 957853835365102397, guid: 967d967d755d1864898bcd8c7737c43f, type: 3}
+  xRange: 8
+  ySpawn: 10
+  meteorsPerBurst: 20
+  burstInterval: 0.2
+  difficultyLevel: 1
+  angleRange: 30
 --- !u!1 &1022824044
 GameObject:
   m_ObjectHideFlags: 0
@@ -2606,6 +2660,7 @@ MonoBehaviour:
   regenDelay: 30
   slotPrefab: {fileID: 6939306801154457092, guid: f45ba12f0444fb34a9d44f410297af80, type: 3}
   slotSpacing: 2
+  meteorSpawner: {fileID: 98630217}
 --- !u!61 &1526666728
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3588,8 +3643,9 @@ MonoBehaviour:
   shieldRenderer: {fileID: 0}
   segments: 50
   regenDelay: 30
-  slotPrefab: {fileID: 0}
+  slotPrefab: {fileID: 6939306801154457092, guid: f45ba12f0444fb34a9d44f410297af80, type: 3}
   slotSpacing: 2
+  meteorSpawner: {fileID: 967624745}
 --- !u!61 &1769364981
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5002,7 +5058,6 @@ SceneRoots:
   - {fileID: 1851251359}
   - {fileID: 1732185079}
   - {fileID: 939537838}
-  - {fileID: 98630218}
   - {fileID: 1964795314}
   - {fileID: 1550463159}
   - {fileID: 708702014}
