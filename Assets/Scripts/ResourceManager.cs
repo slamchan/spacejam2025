@@ -25,6 +25,7 @@ public class ResourceManager : MonoBehaviour
         public int techPoint = 17;
         public int powerExpense = 0;
         public int maxBuildLevel = 3;
+        public bool hasResearchCenter = false;
 
         public int oreIncome = 0;
         public int waterIncome = 0;

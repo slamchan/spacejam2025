@@ -110,6 +110,7 @@ MonoBehaviour:
   - {fileID: 5516022244633696736, guid: e830ed6d92bfd264c933f386bf118ab3, type: 3}
   - {fileID: 4806653736802111648, guid: 62688978a07f5144197d45aca66a1f42, type: 3}
   - {fileID: 8960172238221543338, guid: 11b679b805a3a6d4b8d14871613c9b3a, type: 3}
+  - {fileID: 8960172238221543338, guid: a32fd0dc36ba7d144ac13eddfa307926, type: 3}
   isOccupied: 0
   currentBuilding: {fileID: 0}
   upgradeCostText: {fileID: 6043469671828850310}
