@@ -11,10 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: eb4318f969eeddc41a13617ec3f63fde
-  - enabled: 0
+  - enabled: 1
     path: "Assets/Scenes/Ehk\xE4MainPeli.unity"
     guid: ae35bbea15db8e94ead7cd3797773ca9
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/TestScene.unity
     guid: 9edabc5e5d2197d4ea3cbcdf3dcb6b76
   m_configObjects:
