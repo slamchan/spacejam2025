@@ -1,8 +1,11 @@
+using System;
 using UnityEngine;
 using TMPro;
+
 public class PlayerController : MonoBehaviour
 {
     public int playerId = 1;
+    public bool isFacingRight = true;
 
     [Header("Movement")]
     public float moveSpeed = 5f;
@@ -28,9 +31,12 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private bool isGrounded;
 
+    Animator animator;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -38,6 +44,9 @@ public class PlayerController : MonoBehaviour
         // Horizontal movement
         float moveInput = Input.GetAxisRaw(horizontalAxis);
         rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
+        animator.SetFloat("xVelocity", Math.Abs(rb.linearVelocity.x));
+
+        FlipSprite();
 
         // Ground check
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
@@ -50,6 +59,17 @@ public class PlayerController : MonoBehaviour
 
         // Minimap update
         UpdateMinimap();
+    }
+
+    private void FlipSprite()
+    {
+        if (isFacingRight && Input.GetAxisRaw(horizontalAxis) < 0f || !isFacingRight && Input.GetAxisRaw(horizontalAxis) > 0f)
+        {
+            isFacingRight = !isFacingRight;
+            Vector3 ls = transform.localScale;
+            ls.x *= -1f;
+            transform.localScale = ls;
+        }
     }
 
     private void UpdateMinimap()
