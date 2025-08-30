@@ -57,11 +57,7 @@ public class Meteor : MonoBehaviour
         PlayerController player = collision.collider.GetComponent<PlayerController>();
         if (player != null)
         {
-            if (player.shield > 0)
-            {
-                player.shield -= power;
-                if (player.shield < 0) player.shield = 0;
-            }
+//todo
             DestroyMeteor();
         }
 

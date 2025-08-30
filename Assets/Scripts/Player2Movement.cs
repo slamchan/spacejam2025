@@ -22,6 +22,7 @@ public class Player2Movement : MonoBehaviour
     [Header("World Size")]
     public float halfWorldWidth = 10f;   // match LoopingWorld
     public float halfWorldHeight = 5f;   // set to 0 if no vertical looping
+    public bool canJump = true;
 
      void Start()
     {
@@ -51,7 +52,7 @@ public class Player2Movement : MonoBehaviour
         playerIcon.localPosition = new Vector3(posX, posY, 0f);
 
         // Jump
-        if (Input.GetKeyDown(KeyCode.UpArrow) && isGrounded)
+        if (Input.GetKeyDown(KeyCode.UpArrow) && isGrounded && canJump)
         {
             rb2.linearVelocity = new Vector2(rb2.linearVelocity.x, jumpForce);
         }

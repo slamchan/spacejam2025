@@ -23,6 +23,8 @@ public class Player1Movement : MonoBehaviour
     public float halfWorldWidth = 10f;   // match LoopingWorld
     public float halfWorldHeight = 5f;   // set to 0 if no vertical looping
 
+    public bool canJump = true;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -51,19 +53,9 @@ public class Player1Movement : MonoBehaviour
         playerIcon.localPosition = new Vector3(posX, posY, 0f);
 
         // Jump
-        if (Input.GetKeyDown(KeyCode.W) && isGrounded)
+        if (Input.GetKeyDown(KeyCode.W) && isGrounded && canJump)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
-        }
-    }
-
-    void OnDrawGizmosSelected()
-    {
-        // Visualize ground check in Scene view
-        if (groundCheck != null)
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
         }
     }
 }

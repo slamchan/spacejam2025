@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 [RequireComponent(typeof(CircleCollider2D), typeof(LineRenderer))]
 public class Base : Building
@@ -19,7 +20,9 @@ public class Base : Building
     private float timeSinceDamage = 0f;
     public float regenDelay = 30f;
 
-
+    public GameObject slotPrefab;   // Empty "slot" marker prefab
+    public float slotSpacing = 10f;  // Distance from base
+    private List<BuildingSlot> slots = new List<BuildingSlot>();
 
     protected override void NewAwake()
     {
@@ -58,7 +61,36 @@ public class Base : Building
     }
 
 
+    private void AddSlots(int countPerSide)
+    {
+        // Calculate base position
+        Vector3 basePos = transform.position;
 
+        for (int i = 0; i < countPerSide; i++)
+        {
+            float offset = (i + 1) * slotSpacing;
+
+            // Left side slot
+            Vector3 leftPos = basePos + Vector3.left * offset;
+            CreateSlot(leftPos);
+
+            // Right side slot
+            Vector3 rightPos = basePos + Vector3.right * offset;
+            CreateSlot(rightPos);
+        }
+    }
+
+    private void CreateSlot(Vector3 pos)
+    {
+        GameObject slotObj = Instantiate(slotPrefab, pos, Quaternion.identity, transform);
+        BuildingSlot slot = slotObj.GetComponent<BuildingSlot>();
+        slots.Add(slot);
+    }
+
+    public List<BuildingSlot> GetSlots()
+    {
+        return slots;
+    }
 
     private void RegenerateShield()
     {
@@ -151,7 +183,7 @@ public class Base : Building
     {
         base.ApplyUpgradeEffects();
         maxShieldHP = currentLevel * startingShield;
-        shieldRadius = 5f+currentLevel * 2f;
+        shieldRadius = 5f + currentLevel * 2f;
         if (maxShieldHP > shieldHP)
         {
             shieldHP += startingShield;
@@ -161,7 +193,8 @@ public class Base : Building
             shieldHP = maxShieldHP;
         }
         UpdateShieldStatus();
-
+        slotSpacing += 2;
+        AddSlots(1);
     }
 
 }
