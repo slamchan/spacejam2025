@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3327936532229219420}
   - component: {fileID: 8023635859462686210}
   - component: {fileID: 2918830917989836387}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: MeteorPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -82,16 +82,16 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: -2182124076254010665, guid: 938d8e01bab07354d82c452e6340591d, type: 3}
+  m_SortingOrder: 11
+  m_Sprite: {fileID: 2393782338855336523, guid: d63e91225ac6afd4c80b3f15a49cc367, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 3.61, y: 4.12}
+  m_Size: {x: 1.28, y: 1.02}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!58 &5223667467399449953
@@ -186,7 +186,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 1b08dc076e281024c92d3ea5549b48b6, type: 3}
+  m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
