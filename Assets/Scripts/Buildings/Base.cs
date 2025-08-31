@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(CircleCollider2D), typeof(LineRenderer))]
 public class Base : Building
@@ -158,7 +159,35 @@ public class Base : Building
                     if (buildingHp <= 0 && currentLevel > 0)
                     {
                         Upgrade(-1);
-
+                        Debug.Log($"Level of the building is {currentLevel}, buildingHp is {buildingHp}");
+                        if (currentLevel == 0)
+                        {
+                            buildingHp--;
+                            if (buildingHp <= 0)
+                            {
+                                if (Multiplayer.Instance != null && Multiplayer.Instance.P2)
+                                {
+                                    // Multiplayer: decide winner based on which player's base was destroyed
+                                    if (ownerPlayerId == playerOnTopPlayerId)
+                                    {
+                                        GameManager.SetEndGame(EndGameType.Player2Win);
+                                        Debug.Log("Base 1 destroyed! Game Over.");
+                                    }
+                                    else
+                                    {
+                                        GameManager.SetEndGame(EndGameType.Player1Win);
+                                        Debug.Log("Base 2 destroyed! Game Over.");
+                                    }
+                                }
+                                else
+                                {
+                                    // Singleplayer: just show base destroyed
+                                    Debug.Log("Base destroyed!");
+                                    GameManager.SetEndGame(EndGameType.BaseDied);
+                                }
+                                UnityEngine.SceneManagement.SceneManager.LoadScene("GameEnd");
+                            }
+                        }
                     }
                 }
             }
