@@ -9,10 +9,17 @@ public class Multiplayer : MonoBehaviour
     public GameObject[] assetsToEnable;
     public GameObject[] assetsToDisable;
 
+    public static Multiplayer Instance;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     private void Start()
     {
         loadedToggleState = PlayerPrefs.GetInt("ToggleState", 0) == 1;
-        //loadedToggleState = true;
+        loadedToggleState = false;
         P2 = loadedToggleState;
     }
 

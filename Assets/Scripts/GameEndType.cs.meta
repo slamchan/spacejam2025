@@ -1,2 +1,15 @@
 fileFormatVersion: 2
 guid: 923e025e26d47fb4ab0ba7596fa9450e
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - player1WinSprite: {instanceID: 0}
+  - player2WinSprite: {instanceID: 0}
+  - baseDeadSprite: {instanceID: 0}
+  - endImage: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
