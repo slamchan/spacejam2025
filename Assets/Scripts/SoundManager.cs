@@ -7,7 +7,7 @@ public class SoundManager : MonoBehaviour
 
     // Reference to the AudioSource component for background music
     private AudioSource musicAudioSource;
-    
+
     // Reference to the AudioSource for one-time sounds
     private AudioSource soundEffectAudioSource;
 
@@ -17,6 +17,10 @@ public class SoundManager : MonoBehaviour
     // One-time sound clip (assigned in Inspector)
     public AudioClip destructionSound;
 
+    // player movement
+    private AudioSource playerMovementAudioSource;
+    public AudioClip playerMovementSound;
+
     void Awake()
     {
         // Ensure only one SoundManager exists
@@ -25,7 +29,7 @@ public class SoundManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        
+
         // Set the instance
         Instance = this;
 
@@ -36,11 +40,15 @@ public class SoundManager : MonoBehaviour
         musicAudioSource = gameObject.AddComponent<AudioSource>();
         musicAudioSource.clip = backgroundMusic;
         musicAudioSource.loop = true;
-       // musicAudioSource.Play(); // Start playing background music
+        musicAudioSource.Play(); // Start playing background music
 
         // Find or create the sound effect AudioSource (for one-time sounds)
         soundEffectAudioSource = gameObject.AddComponent<AudioSource>();
         soundEffectAudioSource.loop = false;  // One-time sound effect should not loop
+
+        playerMovementAudioSource = gameObject.AddComponent<AudioSource>();
+        playerMovementAudioSource.loop = true;
+        playerMovementAudioSource.clip = playerMovementSound;
     }
 
     // Play the destruction sound effect (or any one-time sound)
@@ -49,6 +57,18 @@ public class SoundManager : MonoBehaviour
         if (destructionSound != null)
         {
             soundEffectAudioSource.PlayOneShot(destructionSound);
+        }
+    }
+
+    public void SetPlayerMovementSound(bool active)
+    {
+        if (active && !playerMovementAudioSource.isPlaying)
+        {
+            playerMovementAudioSource.Play();
+        }
+        else if (!active && playerMovementAudioSource.isPlaying)
+        {
+            playerMovementAudioSource.Stop();
         }
     }
 }

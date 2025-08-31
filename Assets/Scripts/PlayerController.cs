@@ -50,6 +50,8 @@ public class PlayerController : MonoBehaviour
 
         // Ground check
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+        
+        SoundManager.Instance.SetPlayerMovementSound(isGrounded && Math.Abs(rb.linearVelocity.x) != 0f);
 
         // Jump
         if (Input.GetKeyDown(jumpKey) && isGrounded && canJump)
