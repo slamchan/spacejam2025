@@ -18,8 +18,12 @@ public class PowerPlant : Building
 
     }
 
-    void Start()
+    protected override void NewUpdate()
     {
-        InitializeUpgradePath("powerMaxLevel");
+        base.NewUpdate();
+        if (playerOnTop)
+        {
+            InitializeUpgradePath("powerMaxLevel");
+        }
     }
 }

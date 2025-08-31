@@ -20,8 +20,12 @@ public class IceDrill : Building
         owner.powerExpense += 2 * upg;
     }
 
-    void Start()
+    protected override void NewUpdate()
     {
-        InitializeUpgradePath("iceDrillMaxLevel");
+        base.NewUpdate();
+        if (playerOnTop)
+        {
+            InitializeUpgradePath("iceDrillMaxLevel");
+        }
     }
 }

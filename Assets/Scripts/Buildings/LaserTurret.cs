@@ -16,14 +16,14 @@ public class LaserTurret : Building
 
     private float fireCooldown = 0f;
 
-    void Start()
-    {
-        InitializeUpgradePath("laserTurretMaxLevel");
-    }
 
     protected override void NewUpdate()
     {
         base.NewAwake();
+        if (playerOnTop)
+        {
+            InitializeUpgradePath("laserTurretMaxLevel");
+        }
         if (!CanShoot() | currentLevel < 1)
             return;
 

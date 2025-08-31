@@ -26,11 +26,6 @@ public class Base : Building
 
     public MeteorSpawner meteorSpawner;
 
-    void Start()
-    {
-        InitializeUpgradePath("habitatMaxLevel");
-    }
-
     protected override void NewAwake()
     {
         base.NewAwake();
@@ -52,6 +47,11 @@ public class Base : Building
     protected override void NewUpdate()
     {
         base.NewUpdate();
+        if (playerOnTop)
+        {
+            InitializeUpgradePath("habitatMaxLevel");
+        }
+
         if (shieldHP <= 0)
         {
             timeSinceDamage += Time.deltaTime;
