@@ -129,7 +129,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 2.06
+  m_Radius: 0.3
 --- !u!50 &3327936532229219420
 Rigidbody2D:
   serializedVersion: 5
@@ -175,6 +175,7 @@ MonoBehaviour:
   collectiblePrefab: {fileID: 3667718002594293343, guid: 5bb0fad605f0e8647badcb590f0f11f3, type: 3}
   resourceType: ore
   amount: 1
+  spriteTransform: {fileID: 0}
 --- !u!82 &2918830917989836387
 AudioSource:
   m_ObjectHideFlags: 0
