@@ -4,22 +4,34 @@ public class MeteorSpawner : MonoBehaviour
 {
     [Header("Meteor Settings")]
     public GameObject meteorPrefab;
-    public float xRange = 8f;        // Horizontal spawn range
-    public float ySpawn = 10f;       // Height to spawn
+    public float xRange = 8f;
+    public float ySpawn = 10f;
 
     [Header("Burst Settings")]
-    public int meteorsPerBurst = 20;  // How many meteors per trigger
-    public float burstInterval = 0.2f; // Delay between meteors in a burst
+    public int meteorsPerBurst = 5;
+    public float burstInterval = 2f;
 
     [Header("Difficulty Settings")]
-    public int difficultyLevel = 1;  // Difficulty multiplier
-    public float angleRange = 60f;   // Max deviation from straight down
+    public float difficultyLevel = 1f;   // <-- make float so we can multiply by 1.1
+    public float angleRange = 60f;
 
     private bool spawning = false;
+    private float spawnTimer = 0f;
+    private float spawnInterval = 120f;
 
-    /// <summary>
-    /// Call this from outside (e.g. button, timer, building, etc.)
-    /// </summary>
+    void Update()
+    {
+        // Count up with deltaTime
+        spawnTimer += Time.deltaTime;
+        if (spawnTimer >= spawnInterval)
+        {
+            TriggerSpawn();
+            difficultyLevel *= 1.1f;
+            spawnTimer = 0f;
+            Debug.Log($"Difficulty increased to {difficultyLevel:F2}");
+        }
+    }
+
     public void TriggerSpawn()
     {
         if (!spawning)
@@ -30,7 +42,7 @@ public class MeteorSpawner : MonoBehaviour
     {
         spawning = true;
 
-        int totalMeteors = meteorsPerBurst * difficultyLevel;
+        int totalMeteors = Mathf.RoundToInt(meteorsPerBurst * difficultyLevel);
         for (int i = 0; i < totalMeteors; i++)
         {
             SpawnMeteor();
@@ -42,10 +54,9 @@ public class MeteorSpawner : MonoBehaviour
 
     private void SpawnMeteor()
     {
-        // Spawn directly above the spawner/base
         Vector2 spawnPos = new Vector2(
-            transform.position.x + Random.Range(-xRange, xRange),  // optional horizontal spread
-            transform.position.y + ySpawn                            // height above the spawner
+            transform.position.x + Random.Range(-xRange, xRange),
+            transform.position.y + ySpawn
         );
 
         GameObject meteorInstance = Instantiate(meteorPrefab, spawnPos, Quaternion.identity);
@@ -58,14 +69,11 @@ public class MeteorSpawner : MonoBehaviour
             Vector2 dir = Quaternion.Euler(0, 0, angle) * Vector2.down;
             meteorScript.SetDirection(dir);
 
-            // Add random spin
-            float spinSpeed = Random.Range(-180f, 180f); // degrees/sec
+            float spinSpeed = Random.Range(-180f, 180f);
             meteorScript.SetSpin(spinSpeed);
 
-            // Scale with difficulty
             meteorScript.hp = Mathf.CeilToInt(meteorScript.hp * difficultyLevel);
             meteorScript.power = Mathf.CeilToInt(meteorScript.power * difficultyLevel);
         }
     }
-
 }
