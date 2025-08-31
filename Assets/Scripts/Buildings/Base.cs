@@ -204,7 +204,8 @@ public class Base : Building
         }
         UpdateShieldStatus();
         slotSpacing += 3;
-        AddSlots(1);
+        if (upg > 0)
+            AddSlots(1);
         meteorSpawner.xRange += 3 * upg;
         meteorSpawner.ySpawn += 3 * upg;
 
