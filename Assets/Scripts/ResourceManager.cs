@@ -29,9 +29,9 @@ public class ResourceManager : MonoBehaviour
 
 
         public int oreMod = 4;
-        public int foodMod = 6;
-        public int powerMod = 3;
-        public int waterMod = 4;
+        public int foodMod = 10;
+        public int powerMod = 6;
+        public int waterMod = 10;
 
 
         public int oreIncome = 0;
@@ -145,10 +145,6 @@ public class ResourceManager : MonoBehaviour
                 int expenses = players[i].calculateExpenses(res);
                 players[i][res] += amount - expenses;
             }
-
-            spawnerP1.TriggerSpawn();
-            spawnerP2.TriggerSpawn();
-            // spawner.difficultyLevel++;
         }
 
     }
