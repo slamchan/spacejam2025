@@ -38,17 +38,13 @@ public class TechTree
 
     public TechTree()
     {
-        AddNode("oreDrillMaxLevel", "Upgrade max ore drill", 1);
-        AddNode("iceDrillMaxLevel", "Upgrade max ice drill", 1);
-        AddNode("farmDomeMaxLevel", "Upgrade max farming dome", 1);
-        AddNode("habitatMaxLevel", "Upgrade max habitat", 1);
-        AddNode("powerMaxLevel", "Upgrade max power", 1);
-        AddNode("laserTurretMaxLevel", "Upgrade max laser turret", 2);
-        AddNode("shieldMaxLevel", "Upgrade max shield", 3);
-        AddNode("oreProd", "Upgrade ore productivity", 3);
-        AddNode("iceProd", "Upgrade ice productivity", 3);
-        AddNode("foodProd", "Upgrade food productivity", 3);
-        AddNode("powerProd", "Upgrade power productivity", 3);
+        AddNode("oreDrillMaxLevel", "Max ore drill", 1);
+        AddNode("iceDrillMaxLevel", "Max ice drill", 1);
+        AddNode("farmDomeMaxLevel", "Max farming dome", 1);
+        AddNode("habitatMaxLevel", "Max habitat", 1);
+        AddNode("powerMaxLevel", "Max power plant", 1);
+        AddNode("laserTurretMaxLevel", "Max laser turret", 2);
+        AddNode("shieldMaxLevel", "Max shield", 3);
     }
 
     public TechNode GetNodeById(string id) =>
@@ -81,7 +77,7 @@ public class TechTree
         if (node.CanResearch(player))
         {
             player.techPoint -= node.cost;
-            player.UnlockTech(node.id);
+            player.UnlockTech(node);
             return true;
         }
 

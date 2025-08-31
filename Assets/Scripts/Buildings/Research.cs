@@ -35,7 +35,7 @@ public class Research : Building
         owner = ResourceManager.Instance.players[ownerPlayerId];
         owner.hasResearchCenter = true;
         upgradePaths = new List<List<TechLevel>>();
-        techTree = new TechTree();
+        techTree = owner.techTree;
         foreach (TechNode tech in techTree.roots)
         {
             List<TechLevel> upgradePath = new List<TechLevel>();

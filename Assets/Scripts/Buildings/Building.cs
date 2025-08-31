@@ -11,6 +11,7 @@ public class Building : MonoBehaviour
         public int resCost;
         public string resType;
         public int requiredBuildLevel;
+        public TechNode requiredTech;
         public Sprite sprite;
     }
 
@@ -32,6 +33,7 @@ public class Building : MonoBehaviour
 
 
     public TMP_Text upgradeCostText;
+    public int baseCost;
 
 
     protected void Update()
