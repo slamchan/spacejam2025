@@ -111,6 +111,7 @@ MonoBehaviour:
   - {fileID: 4806653736802111648, guid: 62688978a07f5144197d45aca66a1f42, type: 3}
   - {fileID: 8960172238221543338, guid: 11b679b805a3a6d4b8d14871613c9b3a, type: 3}
   - {fileID: 8960172238221543338, guid: a32fd0dc36ba7d144ac13eddfa307926, type: 3}
+  - {fileID: 8960172238221543338, guid: a3b977fbbdd14fa4b83c84fef312c8d8, type: 3}
   isOccupied: 0
   currentBuilding: {fileID: 0}
   upgradeCostText: {fileID: 6043469671828850310}
