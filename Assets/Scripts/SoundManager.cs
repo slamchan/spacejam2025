@@ -21,6 +21,9 @@ public class SoundManager : MonoBehaviour
     private AudioSource playerMovementAudioSource;
     public AudioClip playerMovementSound;
 
+    //Laser
+    public AudioClip laserSound;
+
     void Awake()
     {
         // Ensure only one SoundManager exists
@@ -57,6 +60,14 @@ public class SoundManager : MonoBehaviour
         if (destructionSound != null)
         {
             soundEffectAudioSource.PlayOneShot(destructionSound);
+        }
+    }
+
+    public void PlayLaserSound()
+    {
+        if (laserSound != null)
+        {
+            soundEffectAudioSource.PlayOneShot(laserSound);
         }
     }
 

@@ -74,6 +74,8 @@ public class LaserTurret : Building
         // make a new instance (clone)
         GameObject laserInstance = Instantiate(laserPrefab, firePoint.position, Quaternion.identity);
 
+        SoundManager.Instance.PlayLaserSound();
+
         // get projectile component
         LaserProjectile proj = laserInstance.GetComponent<LaserProjectile>();
         if (proj != null)
