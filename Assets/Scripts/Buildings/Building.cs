@@ -104,12 +104,12 @@ public class Building : MonoBehaviour
         // Handle Player 2 key input
         else if (owner == ResourceManager.Instance.players[2]) // Player 2
         {
-            if (Input.GetKeyDown(KeyCode.Minus))  // "-" key for Player 2
+            if (Input.GetKeyDown(KeyCode.N))  // "-" key for Player 2
             {
                 // Example: Assign 1 worker
                 AssignWorker(1);
             }
-            if (Input.GetKeyDown(KeyCode.Period))
+            if (Input.GetKeyDown(KeyCode.M))
             {
                 // Example: Assign 1 worker
                 AssignWorker(-1);
