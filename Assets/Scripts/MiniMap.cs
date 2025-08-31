@@ -11,7 +11,7 @@ public class MinimapManager : MonoBehaviour
     public Transform player1;          // Reference to player 1
 
     [Header("World Size")]
-    public float halfWorldWidth = 10f;   // same as LoopingWorld script
+    public float halfWorldWidth = 200f;   // same as LoopingWorld script
     public float halfWorldHeight = 5f;   // for vertical space
 
     void Update()

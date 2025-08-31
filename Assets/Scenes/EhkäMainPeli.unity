@@ -2117,7 +2117,7 @@ Transform:
   m_GameObject: {fileID: 1526666723}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2159,7 +2159,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 3
+  m_Radius: 4
 --- !u!120 &1526666726
 LineRenderer:
   serializedVersion: 2
@@ -2343,13 +2343,13 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3.18, y: 1.23}
+    oldSize: {x: 9.3, y: 8.1}
     newSize: {x: 3.61, y: 4.12}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.5, y: 1.5}
+  m_Size: {x: 6, y: 6}
   m_EdgeRadius: 0
 --- !u!212 &1526666729
 SpriteRenderer:
@@ -2398,7 +2398,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 2023553009028401766, guid: 307c2e1f1c45852458d03fd7fdf5f82a, type: 3}
+  m_Sprite: {fileID: -3096565366318829705, guid: 89d99fff8ac09cb4da2adee0d4cd5391, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -3075,7 +3075,7 @@ Transform:
   m_GameObject: {fileID: 1769364976}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3301,7 +3301,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3.18, y: 1.23}
+    oldSize: {x: 9.3, y: 8.1}
     newSize: {x: 3.61, y: 4.12}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -3356,7 +3356,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 2023553009028401766, guid: 307c2e1f1c45852458d03fd7fdf5f82a, type: 3}
+  m_Sprite: {fileID: -3096565366318829705, guid: 89d99fff8ac09cb4da2adee0d4cd5391, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -3828,6 +3828,58 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2043257820}
   m_CullTransparentMesh: 1
+--- !u!1 &2069952296
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2069952298}
+  - component: {fileID: 2069952297}
+  m_Layer: 0
+  m_Name: CollectibleSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2069952297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2069952296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a2a31bb54ac6da49a4f6978b1fda316, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CollectibleSpawner
+  collectiblePrefabs:
+  - {fileID: 3667718002594293343, guid: 13ee40bd13ea0cc488aaf300c8f2d4cf, type: 3}
+  - {fileID: 3667718002594293343, guid: 8fdfa507c2d13924b86599b6080b6963, type: 3}
+  - {fileID: 3667718002594293343, guid: b822500c1b664cd4185c9438787739f9, type: 3}
+  spawnInterval: 5
+  maxCollectibles: 30
+  areaSize: {x: 200, y: 1}
+  centerPoint: {fileID: 967624744}
+--- !u!4 &2069952298
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2069952296}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2089021789
 GameObject:
   m_ObjectHideFlags: 0
@@ -4189,3 +4241,4 @@ SceneRoots:
   - {fileID: 1458933419}
   - {fileID: 448639060}
   - {fileID: 1024898823}
+  - {fileID: 2069952298}

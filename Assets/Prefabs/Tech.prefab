@@ -15,8 +15,8 @@ GameObject:
   - component: {fileID: -6383272411570209903}
   - component: {fileID: -16694141149589227}
   m_Layer: 9
-  m_Name: Coin
-  m_TagString: Untagged
+  m_Name: Tech
+  m_TagString: Collectible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -83,7 +83,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -6043847355747229575, guid: f307b0de621eaa348ab3f1c8dce2e41e, type: 3}
+  m_Sprite: {fileID: 6687691602686192685, guid: b931effb39c89e64ab9675310eea00e5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -143,7 +143,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Collectible
   amount: 1
-  resourceType: ore
+  resourceType: techPoint
 --- !u!50 &-6383272411570209903
 Rigidbody2D:
   serializedVersion: 5

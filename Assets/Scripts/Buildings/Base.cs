@@ -71,10 +71,11 @@ public class Base : Building
     {
         // Calculate base position
         Vector3 basePos = transform.position;
+        basePos.y -= 3.5f;  // move 1 unit down
 
         for (int i = 0; i < countPerSide; i++)
         {
-            float offset = (i + 1) * slotSpacing;
+            float offset = (i + 1.8f) * slotSpacing;
 
             // Left side slot
             Vector3 leftPos = basePos + Vector3.left * offset;
@@ -89,7 +90,10 @@ public class Base : Building
     private void CreateSlot(Vector3 pos)
     {
         GameObject slotObj = Instantiate(slotPrefab, pos, Quaternion.identity, transform);
+        slotObj.transform.localScale = Vector3.one;  // reset scale to (1,1,1)
+
         BuildingSlot slot = slotObj.GetComponent<BuildingSlot>();
+
         slots.Add(slot);
     }
 
