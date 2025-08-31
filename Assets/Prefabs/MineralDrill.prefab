@@ -319,7 +319,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: 2023553009028401766, guid: 307c2e1f1c45852458d03fd7fdf5f82a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -402,3 +402,4 @@ MonoBehaviour:
     sprite: {fileID: 2157900553357142968, guid: c06aae4f97d6fa541a68289c88517e8d, type: 3}
   buildingName: MineralDrill
   upgradeCostText: {fileID: 7119800386542062150}
+  baseCost: 0

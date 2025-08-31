@@ -37,7 +37,7 @@ public class Meteor : MonoBehaviour
     private void Update()
     {
         // Move in straight line along the assigned direction
-                transform.Translate(direction * fallSpeed * Time.deltaTime, Space.World);
+        transform.Translate(direction * fallSpeed * Time.deltaTime, Space.World);
         // Only spin the sprite child
         if (spriteTransform != null)
         {

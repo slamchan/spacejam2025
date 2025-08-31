@@ -17,7 +17,7 @@ public class MeteorSpawner : MonoBehaviour
 
     private bool spawning = false;
     private float spawnTimer = 0f;
-    public float spawnInterval = 120f;
+    public float spawnInterval = 30f;
 
     void Update()
     {
