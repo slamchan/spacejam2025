@@ -60,6 +60,8 @@ public class BuildingSlot : MonoBehaviour
         Building b = currentBuilding.GetComponent<Building>();
         if (b != null)
         {
+                         Debug.Log($"Player {ownerPlayerId}:  {playerOnTopId }");
+
             b.ownerPlayerId = ownerPlayerId;
         }
         isOccupied = true;

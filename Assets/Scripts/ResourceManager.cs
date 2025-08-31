@@ -7,10 +7,6 @@ using System.Linq;
 public class ResourceManager : MonoBehaviour
 {
     public static ResourceManager Instance;
-
-    public MeteorSpawner spawnerP1;
-    public MeteorSpawner spawnerP2;
-
     public GameObject resourcePrefabP1; // prefab with Image + TMP_Text
     public GameObject resourcePrefabP2; // prefab with Image + TMP_Text
 
@@ -212,14 +208,14 @@ public class ResourceManager : MonoBehaviour
                 {
                     // Optional: match by some identifier, e.g. text.name
                     string key = text.name; // assumes text.name matches resourceTypes
-
                     text.text = players[i][key].ToString();
                 }
 
             }
             else
             {
-                TMP_Text[] texts = p.GetComponentsInChildren<TMP_Text>();
+                
+                TMP_Text[] texts = p2.GetComponentsInChildren<TMP_Text>();
 
                 foreach (var text in texts)
                 {
