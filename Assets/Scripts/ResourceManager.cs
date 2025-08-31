@@ -145,10 +145,8 @@ public class ResourceManager : MonoBehaviour
                 int expenses = players[i].calculateExpenses(res);
                 players[i][res] += amount - expenses;
             }
+            UpdateUI();
 
-            spawnerP1.TriggerSpawn();
-            spawnerP2.TriggerSpawn();
-            // spawner.difficultyLevel++;
         }
 
     }
@@ -195,7 +193,7 @@ public class ResourceManager : MonoBehaviour
         }
         return false;
     }
-    private void UpdateUI()
+        private void UpdateUI()
     {
         // P1
         p1StatsText.text =
@@ -215,5 +213,21 @@ public class ResourceManager : MonoBehaviour
         "P: " + players[2]["availablePop"] + "\n" +
         "Pwr: " + players[2]["power"] + "\n" +
         "Tech: " + players[2]["techPoint"];
+    }
+    private void UpdateUI2()
+    {
+        string[] resourceTypes = { "techPoint", "water", "food", "power", "ore", "availablePop" };
+        for (int i = 1; i <= 2; i++)
+        {
+            foreach (var res in resourceTypes)
+            {
+                TMP_Text amountText = GameObject.Find(res)?.GetComponent<TMP_Text>();
+                Debug.Log($"Player {amountText}:  {res} {players[i][res].ToString()}");
+                Debug.Log($"Player {players[i].powerExpense}:  {players[i].maxPop} {players[i].availablePop} ");
+
+                amountText.text = players[i][res].ToString();
+
+            }
+        }
     }
 }
