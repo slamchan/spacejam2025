@@ -172,12 +172,13 @@ public class Base : Building
                         if (currentLevel == 0)
                         {
                             buildingHp--;
+                            Debug.Log($"Level of the building is {currentLevel}, buildingHp is {buildingHp} owner {ownerPlayerId}");
                             if (buildingHp <= 0)
                             {
                                 if (Multiplayer.Instance != null && Multiplayer.Instance.P2)
                                 {
                                     // Multiplayer: decide winner based on which player's base was destroyed
-                                    if (ownerPlayerId == playerOnTopPlayerId)
+                                    if (ownerPlayerId == 1)
                                     {
                                         GameManager.SetEndGame(EndGameType.Player2Win);
                                         Debug.Log("Base 1 destroyed! Game Over.");

@@ -1106,6 +1106,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MusicManager
   backgroundMusic: {fileID: 8300000, guid: d689b2ce606f3b74daf9c5d452213929, type: 3}
   destructionSound: {fileID: 8300000, guid: b764d8c5806fa9247adb90400c316e83, type: 3}
+  playerMovementSound: {fileID: 8300000, guid: 47931e1431d48f9438a8c872bd31575f, type: 3}
+  laserSound: {fileID: 8300000, guid: 76bf42471ac69c64f908c4c4b0262fca, type: 3}
 --- !u!82 &1024898822
 AudioSource:
   m_ObjectHideFlags: 0

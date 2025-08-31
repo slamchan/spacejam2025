@@ -11,6 +11,9 @@ public class ResourceManager : MonoBehaviour
     public MeteorSpawner spawnerP1;
     public MeteorSpawner spawnerP2;
 
+    public GameObject resourcePrefabP1; // prefab with Image + TMP_Text
+    public GameObject resourcePrefabP2; // prefab with Image + TMP_Text
+
     [System.Serializable]
     public class PlayerResources
     {
@@ -125,7 +128,7 @@ public class ResourceManager : MonoBehaviour
 
     private void Update()
     {
-        UpdateUI();
+        UpdateUI(resourcePrefabP1, resourcePrefabP2);
         timer += Time.deltaTime;
         if (timer >= updateInterval)
         {
@@ -145,8 +148,6 @@ public class ResourceManager : MonoBehaviour
                 int expenses = players[i].calculateExpenses(res);
                 players[i][res] += amount - expenses;
             }
-            UpdateUI();
-
         }
 
     }
@@ -164,7 +165,7 @@ public class ResourceManager : MonoBehaviour
         players[2] = new PlayerResources();
         players[1].techTree = new TechTree();
         players[2].techTree = new TechTree();
-        UpdateUI();
+        UpdateUI(resourcePrefabP1, resourcePrefabP2);
     }
 
     public bool SpendResources(int playerId, string resType, int cost)
@@ -193,41 +194,42 @@ public class ResourceManager : MonoBehaviour
         }
         return false;
     }
-        private void UpdateUI()
-    {
-        // P1
-        p1StatsText.text =
-        "O: " + players[1]["ore"] + "\n" +
-        "W: " + players[1]["water"] + "\n" +
-        "F: " + players[1]["food"] + "\n" +
-        "P: " + players[1]["availablePop"] + "\n" +
-        "Pwr: " + players[1]["power"] + "\n" +
-        "Tech: " + players[1]["techPoint"];
 
 
-        // P2
-        p2StatsText.text =
-        "O: " + players[2]["ore"] + "\n" +
-        "W: " + players[2]["water"] + "\n" +
-        "F: " + players[2]["food"] + "\n" +
-        "P: " + players[2]["availablePop"] + "\n" +
-        "Pwr: " + players[2]["power"] + "\n" +
-        "Tech: " + players[2]["techPoint"];
-    }
-    private void UpdateUI2()
+    private void UpdateUI(GameObject p1, GameObject p2)
     {
+
+
         string[] resourceTypes = { "techPoint", "water", "food", "power", "ore", "availablePop" };
         for (int i = 1; i <= 2; i++)
         {
-            foreach (var res in resourceTypes)
+            if (i == 1)
             {
-                TMP_Text amountText = GameObject.Find(res)?.GetComponent<TMP_Text>();
-                Debug.Log($"Player {amountText}:  {res} {players[i][res].ToString()}");
-                Debug.Log($"Player {players[i].powerExpense}:  {players[i].maxPop} {players[i].availablePop} ");
 
-                amountText.text = players[i][res].ToString();
+                TMP_Text[] texts = p1.GetComponentsInChildren<TMP_Text>();
+
+                foreach (var text in texts)
+                {
+                    // Optional: match by some identifier, e.g. text.name
+                    string key = text.name; // assumes text.name matches resourceTypes
+
+                    text.text = players[i][key].ToString();
+                }
 
             }
+            else
+            {
+                TMP_Text[] texts = p.GetComponentsInChildren<TMP_Text>();
+
+                foreach (var text in texts)
+                {
+                    // Optional: match by some identifier, e.g. text.name
+                    string key = text.name; // assumes text.name matches resourceTypes
+
+                    text.text = players[i][key].ToString();
+                }
+            }
+
         }
     }
 }
