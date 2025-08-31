@@ -8,20 +8,41 @@ public class Meteor : MonoBehaviour
     public GameObject collectiblePrefab;   // Optional collectible
     public string resourceType;
     public int amount = 1;
+    private float spinSpeed; // rotation speed
+
+    public Transform spriteTransform; // assign the child in Inspector
 
     private Vector2 direction;
 
-
+    private void Awake()
+    {
+        // Find the first child that has a SpriteRenderer
+        SpriteRenderer sr = GetComponentInChildren<SpriteRenderer>();
+        if (sr != null)
+        {
+            spriteTransform = sr.transform;
+        }
+    }
 
     public void SetDirection(Vector2 dir)
     {
         direction = dir.normalized;       // Ensure it’s a unit vector
     }
 
+    public void SetSpin(float spin)
+    {
+        spinSpeed = spin;
+    }
+
     private void Update()
     {
         // Move in straight line along the assigned direction
-        transform.Translate(direction * fallSpeed * Time.deltaTime);
+                transform.Translate(direction * fallSpeed * Time.deltaTime, Space.World);
+        // Only spin the sprite child
+        if (spriteTransform != null)
+        {
+            spriteTransform.Rotate(0f, 0f, spinSpeed * Time.deltaTime, Space.Self);
+        }
     }
 
 

@@ -49,6 +49,7 @@ public class MeteorSpawner : MonoBehaviour
         );
 
         GameObject meteorInstance = Instantiate(meteorPrefab, spawnPos, Quaternion.identity);
+        meteorInstance.transform.localScale = Vector3.one * Random.Range(0.5f, 1.5f);
 
         Meteor meteorScript = meteorInstance.GetComponent<Meteor>();
         if (meteorScript != null)
@@ -56,6 +57,10 @@ public class MeteorSpawner : MonoBehaviour
             float angle = Random.Range(-angleRange, angleRange);
             Vector2 dir = Quaternion.Euler(0, 0, angle) * Vector2.down;
             meteorScript.SetDirection(dir);
+
+            // Add random spin
+            float spinSpeed = Random.Range(-180f, 180f); // degrees/sec
+            meteorScript.SetSpin(spinSpeed);
 
             // Scale with difficulty
             meteorScript.hp = Mathf.CeilToInt(meteorScript.hp * difficultyLevel);
