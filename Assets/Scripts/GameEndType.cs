@@ -1,19 +1,20 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement; // Add this line
 
 public class GameEndType : MonoBehaviour
 {
     [Header("Outcome Sprites")]
     public Sprite player1WinSprite;
     public Sprite player2WinSprite;
-    public Sprite drawSprite;
-    public Sprite timeOutSprite;
+    public Sprite baseDeadSprite;
 
     [Header("UI Reference")]
     public Image endImage; // assign in inspector
 
     void Start()
     {
+        Debug.Log("End state: " + GameManager.endState);
         switch (GameManager.endState)
         {
             case EndGameType.Player1Win:
@@ -22,12 +23,16 @@ public class GameEndType : MonoBehaviour
             case EndGameType.Player2Win:
                 endImage.sprite = player2WinSprite;
                 break;
-            case EndGameType.Draw:
-                endImage.sprite = drawSprite;
-                break;
-            case EndGameType.TimeOut:
-                endImage.sprite = timeOutSprite;
+            case EndGameType.BaseDied:
+                endImage.sprite = baseDeadSprite;
                 break;
         }
+    }
+
+    // Call this method to load the GameEnd scene
+    public void LoadGameEndScene()
+    {
+        GameManager.endState = EndGameType.Player1Win; // or Player2Win, BaseDied
+        SceneManager.LoadScene("GameEnd");
     }
 }

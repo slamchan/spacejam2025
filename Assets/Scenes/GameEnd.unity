@@ -334,7 +334,6 @@ GameObject:
   - component: {fileID: 134468449}
   - component: {fileID: 134468446}
   - component: {fileID: 134468448}
-  - component: {fileID: 134468447}
   m_Layer: 0
   m_Name: MenuConfig
   m_TagString: Untagged
@@ -363,23 +362,6 @@ MonoBehaviour:
   storyButtonSound: {fileID: 0}
   musicAudioSource: {fileID: 0}
   menuMusic: {fileID: 0}
---- !u!114 &134468447
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 134468445}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 923e025e26d47fb4ab0ba7596fa9450e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GameEndType
-  player1WinSprite: {fileID: -8360621857648827146, guid: 909e181821991094ba675c415f581f7c, type: 3}
-  player2WinSprite: {fileID: 3616400437380048829, guid: 501cba9335676ed498ec325b490b5f63, type: 3}
-  drawSprite: {fileID: 0}
-  timeOutSprite: {fileID: 0}
-  endImage: {fileID: 251667450}
 --- !u!114 &134468448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -419,6 +401,7 @@ GameObject:
   - component: {fileID: 251667449}
   - component: {fileID: 251667451}
   - component: {fileID: 251667450}
+  - component: {fileID: 251667452}
   m_Layer: 5
   m_Name: BackGround
   m_TagString: Untagged
@@ -487,6 +470,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 251667448}
   m_CullTransparentMesh: 1
+--- !u!114 &251667452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 251667448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 923e025e26d47fb4ab0ba7596fa9450e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameEndType
+  player1WinSprite: {fileID: 0}
+  player2WinSprite: {fileID: 0}
+  baseDeadSprite: {fileID: -3096565366318829705, guid: 89d99fff8ac09cb4da2adee0d4cd5391, type: 3}
+  endImage: {fileID: 251667450}
 --- !u!1 &267510444
 GameObject:
   m_ObjectHideFlags: 0
