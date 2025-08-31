@@ -5,6 +5,7 @@ public class MenuScript : MonoBehaviour
 {
 
     public GameObject[] backgroundImages;
+    public GameObject backButton;
     public AudioSource audioSource; // AudioSource for playing button sounds
     public AudioClip storyButtonSound;
     public AudioSource musicAudioSource;
@@ -17,10 +18,11 @@ public class MenuScript : MonoBehaviour
     // Method to activate a specific background and hide the rest
     public void ShowBackground(int index)
     {
+        backButton.SetActive(index != 3);
         for (int i = 0; i < backgroundImages.Length; i++)
         {
             PlaySound(storyButtonSound);
-            backgroundImages[i].SetActive(i == index); // Only activate the selected background
+            backgroundImages[i].SetActive(i == index); // Only activate the selected background¨
         }
     }
 
@@ -63,6 +65,18 @@ public class MenuScript : MonoBehaviour
         PlaySound(storyButtonSound);
         ShowBackground(3); // Show the fourth background (Main Menu or default)
     }
+
+    public void onHowToPlaySecondPageButtonClick()
+    {
+        PlaySound(storyButtonSound);
+        ShowBackground(4); // Second page of howToPlay
+    }
+
+    public void onHowToPlayThirdPageButtonClick()
+    {
+        PlaySound(storyButtonSound);
+        ShowBackground(5); // Second page of howToPlay
+    }
     public void OnQuitButtonClick()
     {
         Debug.Log("QuitGame() called - Application.Quit() doesn't work in the editor.");
@@ -72,7 +86,7 @@ public class MenuScript : MonoBehaviour
     {
         SceneManager.LoadScene("MainMenu");
     }
-    
+
     private void PlaySound(AudioClip clip)
     {
         if (audioSource != null && clip != null)
