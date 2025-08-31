@@ -26,6 +26,11 @@ public class Base : Building
 
     public MeteorSpawner meteorSpawner;
 
+    void Start()
+    {
+        InitializeUpgradePath("habitatMaxLevel");
+    }
+
     protected override void NewAwake()
     {
         base.NewAwake();

@@ -20,4 +20,9 @@ public class MineralDrill : Building
     {
         owner.powerExpense += 2 * upg;
     }
+
+    void Start()
+    {
+        InitializeUpgradePath("oreDrillMaxLevel");
+    }
 }

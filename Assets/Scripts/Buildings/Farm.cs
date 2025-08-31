@@ -19,4 +19,9 @@ public class Farm : Building
     {
         owner.powerExpense += 1 * upg;
     }
+
+    void Start()
+    {
+        InitializeUpgradePath("farmDomeMaxLevel");
+    }
 }

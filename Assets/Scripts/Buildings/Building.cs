@@ -39,6 +39,7 @@ public class Building : MonoBehaviour
     {
         owner = ResourceManager.Instance.players[ownerPlayerId];
         int maxLevel = 1 + owner.GetMaxTechLevelByIdPrefix(techIdPrefix);
+        Debug.Log($"max level: {maxLevel}");
         for (int i = 1; i < maxLevel; i++)
         {
             UpgradeLevel level = new UpgradeLevel();
@@ -51,8 +52,19 @@ public class Building : MonoBehaviour
             {
                 level.resCost += (i - 1) * baseCost;
             }
-            
+            level.resType = upgradePath[0].resType;
+            level.requiredBuildLevel = upgradePath.Length - 1;
+            level.requiredTech = owner.techTree.GetNode(techIdPrefix, i);
+            level.sprite = upgradePath[1].sprite;
+            UpgradeLevel[] newUpgradePath = new UpgradeLevel[upgradePath.Length + 1];
+            for (int u = 0; u < upgradePath.Length; u++)
+            {
+                newUpgradePath[u] = upgradePath[u];
+            }
+            upgradePath = newUpgradePath;
+            upgradePath[i + 1] = level;
         }
+        Debug.Log($"upgradePath length: {upgradePath.Length}");
     }
 
 
@@ -186,6 +198,7 @@ public class Building : MonoBehaviour
 
     protected void TryUpgrade()
     {
+        Debug.Log($"try upgrade from {currentLevel} to {currentLevel + 1}");
         if (currentLevel >= upgradePath.Length - 1) return;
 
         var next = upgradePath[currentLevel];

@@ -19,4 +19,9 @@ public class IceDrill : Building
     {
         owner.powerExpense += 2 * upg;
     }
+
+    void Start()
+    {
+        InitializeUpgradePath("iceDrillMaxLevel");
+    }
 }
