@@ -653,7 +653,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 80, y: 0}
+  m_AnchoredPosition: {x: 150, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &708702011
@@ -2293,20 +2293,9 @@ MonoBehaviour:
     resType: ore
     requiredBuildLevel: 0
     sprite: {fileID: -3096565366318829705, guid: 89d99fff8ac09cb4da2adee0d4cd5391, type: 3}
-  - resCost: 0
-    resType: ore
-    requiredBuildLevel: 0
-    sprite: {fileID: 6937817954938267909, guid: 9b92a796865ceeb489871a28dfda1879, type: 3}
-  - resCost: 0
-    resType: ore
-    requiredBuildLevel: 0
-    sprite: {fileID: -6470460504253458178, guid: 8f5beea1e07698949b5ff9db884bd05e, type: 3}
-  - resCost: 0
-    resType: ore
-    requiredBuildLevel: 0
-    sprite: {fileID: -4178046375966092550, guid: 18bebd0961a0b554594c2d021a5f17b9, type: 3}
   buildingName: Base
   upgradeCostText: {fileID: 964578243}
+  baseCost: 0
   shieldHP: 0
   maxShieldHP: 0
   shieldRadius: 5
@@ -2924,8 +2913,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: -3878557786174838139, guid: 161b1310acee84b4bbf0a1d0089119ac, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2971,9 +2960,9 @@ BoxCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
-    border: {x: 0.049999997, y: 0.049999997, z: 0.049999997, w: 0.049999997}
+    border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.16, y: 0.16}
+    oldSize: {x: 3.61, y: 0.14}
     newSize: {x: 0.16, y: 0.16}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -3261,21 +3250,10 @@ MonoBehaviour:
   - resCost: 0
     resType: ore
     requiredBuildLevel: 0
-    sprite: {fileID: 221864673165975527, guid: 28404a955bbda304c9bc05ab08d68136, type: 3}
-  - resCost: 0
-    resType: ore
-    requiredBuildLevel: 0
-    sprite: {fileID: 6937817954938267909, guid: 9b92a796865ceeb489871a28dfda1879, type: 3}
-  - resCost: 0
-    resType: ore
-    requiredBuildLevel: 0
-    sprite: {fileID: -6470460504253458178, guid: 8f5beea1e07698949b5ff9db884bd05e, type: 3}
-  - resCost: 0
-    resType: ore
-    requiredBuildLevel: 0
-    sprite: {fileID: -4178046375966092550, guid: 18bebd0961a0b554594c2d021a5f17b9, type: 3}
+    sprite: {fileID: -3096565366318829705, guid: 89d99fff8ac09cb4da2adee0d4cd5391, type: 3}
   buildingName: Base
   upgradeCostText: {fileID: 1165197736}
+  baseCost: 0
   shieldHP: 100
   maxShieldHP: 100
   shieldRadius: 5
@@ -3702,7 +3680,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3da7b7af8bad8d041aa162531b45ff4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AtWorldEnd
-  halfWidth: 80
+  halfWidth: 200
   halfHeight: 0
 --- !u!114 &1964795317
 MonoBehaviour:
@@ -4171,7 +4149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3da7b7af8bad8d041aa162531b45ff4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AtWorldEnd
-  halfWidth: 80
+  halfWidth: 200
   halfHeight: 0
 --- !u!95 &2124560462
 Animator:
