@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using TMPro;
+using System.Linq;
 
 
 public class ResourceManager : MonoBehaviour
@@ -39,7 +40,17 @@ public class ResourceManager : MonoBehaviour
         public float popIncome = 0.1f;
         public int powerIncome = 0;
         public float techPointIncome = 0.2f;
-        public HashSet<string> unlockedTechs = new HashSet<string>();
+        public HashSet<TechNode> unlockedTechs = new HashSet<TechNode>();
+        public TechTree techTree;
+
+        public int GetMaxTechLevelByIdPrefix(string idPrefix)
+        {
+            return unlockedTechs
+                .Where(node => node.idPrefix == idPrefix)
+                .Select(node => node.level)
+                .DefaultIfEmpty(0)
+                .Max();
+        }
 
         public int this[string fieldName]
         {
@@ -55,7 +66,7 @@ public class ResourceManager : MonoBehaviour
             }
         }
 
-        public bool HasTech(string techId)
+        public bool HasTech(TechNode techId)
         {
             return unlockedTechs.Contains(techId);
         }
@@ -77,9 +88,9 @@ public class ResourceManager : MonoBehaviour
             }
         }
 
-        public void UnlockTech(string techId)
+        public void UnlockTech(TechNode tech)
         {
-            unlockedTechs.Add(techId);
+            unlockedTechs.Add(tech);
         }
 
         public bool AssingWorker(int number)
@@ -153,34 +164,9 @@ public class ResourceManager : MonoBehaviour
         // init 2 players
         players[1] = new PlayerResources();
         players[2] = new PlayerResources();
+        players[1].techTree = new TechTree();
+        players[2].techTree = new TechTree();
         UpdateUI();
-        // Build a simple tree
-        TechTree techTree = new TechTree(); TechNode techNode;
-        // Try researching
-        bool success1 = techTree.ResearchTech(players[1], "oreDrillMaxLevel", 1);
-        techNode = techTree.GetNode("oreDrillMaxLevel", 1);
-        Debug.Log($"Researched \"{techNode.name}\" Level 1 with cost {techNode.cost}: {success1}");
-        Debug.Log($"Current tech points left: {players[1].techPoint}");
-
-        bool fail1 = techTree.ResearchTech(players[1], "oreDrillMaxLevel", 3);
-        techNode = techTree.GetNode("oreDrillMaxLevel", 3);
-        Debug.Log($"Researched \"{techNode.name}\" Level 3 with cost {techNode.cost}: {fail1}");
-        Debug.Log($"Current tech points left: {players[1].techPoint}");
-
-        bool success2 = techTree.ResearchTech(players[1], "oreDrillMaxLevel", 2);
-        techNode = techTree.GetNode("oreDrillMaxLevel", 2);
-        Debug.Log($"Researched \"{techNode.name}\" Level 2 with cost {techNode.cost}: {success2}");
-        Debug.Log($"Current tech points left: {players[1].techPoint}");
-
-        bool success3 = techTree.ResearchTech(players[1], "oreDrillMaxLevel", 3);
-        techNode = techTree.GetNode("oreDrillMaxLevel", 3);
-        Debug.Log($"Researched \"{techNode.name}\" Level 3 with cost {techNode.cost}: {success3}");
-        Debug.Log($"Current tech points left: {players[1].techPoint}");
-
-        bool fail2 = techTree.ResearchTech(players[1], "oreDrillMaxLevel", 4);
-        techNode = techTree.GetNode("oreDrillMaxLevel", 4);
-        Debug.Log($"Researched \"{techNode.name}\" Level 4 with cost {techNode.cost}: {fail2}");
-        Debug.Log($"Current tech points left: {players[1].techPoint}");
     }
 
     public bool SpendResources(int playerId, string resType, int cost)

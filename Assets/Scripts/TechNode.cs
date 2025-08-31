@@ -32,7 +32,7 @@ public class TechNode
     public bool CanResearch(ResourceManager.PlayerResources player)
     {
         // Parent must be unlocked (unless this is the root node)
-        if (parent != null && !player.HasTech(parent.id))
+        if (parent != null && !player.HasTech(parent))
             return false;
 
         // Must have enough tech points
