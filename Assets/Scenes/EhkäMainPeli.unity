@@ -259,6 +259,7 @@ MonoBehaviour:
   burstInterval: 0.2
   difficultyLevel: 1
   angleRange: 30
+  spawnInterval: 120
 --- !u!4 &98630218
 Transform:
   m_ObjectHideFlags: 0
@@ -1119,6 +1120,7 @@ MonoBehaviour:
   burstInterval: 0.2
   difficultyLevel: 1
   angleRange: 30
+  spawnInterval: 120
 --- !u!1 &1022824044
 GameObject:
   m_ObjectHideFlags: 0
@@ -3474,7 +3476,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef6c017c1d0e0ac4e9d3b1316055b043, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BaseBuilding
-  ownerPlayerId: 1
+  ownerPlayerId: 2
   currentLevel: 0
   upgradePath:
   - resCost: 0
