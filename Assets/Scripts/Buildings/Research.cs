@@ -21,13 +21,13 @@ public class Research : Building
             this.tech = tech;
         }
     }
-    private void AddNextTechToPath(List<TechLevel> upgradePath)
+    private void AddNextTechToPath(List<TechLevel> techPath)
     {
-        TechLevel lastIndex = upgradePath[upgradePath.Count - 1];
+        TechLevel lastIndex = techPath[techPath.Count - 1];
         TechNode tech = lastIndex.tech;
         TechNode nextTech = techTree.GetNode(tech.idPrefix, tech.level + 1);
         TechLevel nextLevel = new TechLevel(nextTech);
-        upgradePath.Add(nextLevel);
+        techPath.Add(nextLevel);
     }
     void Start()
     {
@@ -38,10 +38,10 @@ public class Research : Building
         techTree = owner.techTree;
         foreach (TechNode tech in techTree.roots)
         {
-            List<TechLevel> upgradePath = new List<TechLevel>();
+            List<TechLevel> techPath = new List<TechLevel>();
             TechLevel level = new TechLevel(tech);
-            upgradePath.Add(level);
-            upgradePaths.Add(upgradePath);
+            techPath.Add(level);
+            upgradePaths.Add(techPath);
         }
     }
 
