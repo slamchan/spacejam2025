@@ -2292,7 +2292,7 @@ MonoBehaviour:
   - resCost: 0
     resType: ore
     requiredBuildLevel: 0
-    sprite: {fileID: 221864673165975527, guid: 28404a955bbda304c9bc05ab08d68136, type: 3}
+    sprite: {fileID: -3096565366318829705, guid: 89d99fff8ac09cb4da2adee0d4cd5391, type: 3}
   - resCost: 0
     resType: ore
     requiredBuildLevel: 0
