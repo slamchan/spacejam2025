@@ -35,6 +35,26 @@ public class Building : MonoBehaviour
     public TMP_Text upgradeCostText;
     public int baseCost;
 
+    protected void InitializeUpgradePath(string techIdPrefix)
+    {
+        owner = ResourceManager.Instance.players[ownerPlayerId];
+        int maxLevel = 1 + owner.GetMaxTechLevelByIdPrefix(techIdPrefix);
+        for (int i = 1; i < maxLevel; i++)
+        {
+            UpgradeLevel level = new UpgradeLevel();
+            if (i == 1)
+            {
+                level.resCost = baseCost;
+            }
+            level.resCost += i * baseCost;
+            if (i - 1 > 0)
+            {
+                level.resCost += (i - 1) * baseCost;
+            }
+            
+        }
+    }
+
 
     protected void Update()
     {

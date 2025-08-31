@@ -532,12 +532,9 @@ MonoBehaviour:
   - resCost: 0
     resType: 
     requiredBuildLevel: 0
-    sprite: {fileID: 2023553009028401766, guid: 307c2e1f1c45852458d03fd7fdf5f82a, type: 3}
-  - resCost: 0
-    resType: 
-    requiredBuildLevel: 0
     sprite: {fileID: 221864673165975527, guid: 28404a955bbda304c9bc05ab08d68136, type: 3}
   buildingName: Research center
   upgradeCostText: {fileID: 7119800386542062150}
+  baseCost: 0
   selectedTechIndex: 0
   selectedTechText: {fileID: 4453067066270830597}
