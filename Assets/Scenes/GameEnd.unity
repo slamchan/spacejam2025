@@ -347,9 +347,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 923e025e26d47fb4ab0ba7596fa9450e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameEndType
-  player1WinSprite: {fileID: -6818409082084515188, guid: d2ba0c5e24482aa4cb9a55eec295115b, type: 3}
-  player2WinSprite: {fileID: -5657458289059767075, guid: 628449bf8117208478be985e516e94ac, type: 3}
-  baseDeadSprite: {fileID: -8119761416824648764, guid: 260afa8345e65024190d8d600a31d168, type: 3}
+  player1WinSprite: {fileID: -6818409082084515188, guid: 01203cded83a66d4a8a186ed2ea31486, type: 3}
+  player2WinSprite: {fileID: -5657458289059767075, guid: 93a35eec059266946ac53ac8c77c0286, type: 3}
+  baseDeadSprite: {fileID: -8119761416824648764, guid: f769d62976d189840840ebd5bde9b72b, type: 3}
   endImage: {fileID: 251667450}
 --- !u!1 &267510444
 GameObject:
