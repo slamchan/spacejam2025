@@ -41,7 +41,14 @@ public class BuildingSlot : MonoBehaviour
     private void ScrollSelection()
     {
         selectedIndex = (selectedIndex + 1) % availableBuildings.Count;
-        ShowSelectedBuildingInfo();
+        GameObject buildingPrefab = availableBuildings[selectedIndex];
+        if (buildingPrefab.name.ToLower() == "research" && ResourceManager.Instance.players[playerOnTopId].hasResearchCenter)
+        {
+            ScrollSelection();
+            return;
+        }
+        ShowSelectedBuildingInfo(buildingPrefab);
+
     }
 
     private void PlaceSelected(int ownerPlayerId)
@@ -73,11 +80,10 @@ public class BuildingSlot : MonoBehaviour
     }
 
 
-    private void ShowSelectedBuildingInfo()
+    private void ShowSelectedBuildingInfo(GameObject buildingPrefab)
     {
         if (upgradeCostText == null) return;
 
-        GameObject buildingPrefab = availableBuildings[selectedIndex];
         upgradeCostText.text = buildingPrefab.name.ToUpper();
         // You could expand later to also show costs
     }
@@ -89,9 +95,9 @@ public class BuildingSlot : MonoBehaviour
         {
             playerOnTopId = player.playerId;
             player.canJump = false; // or whatever your PlayerController uses
-            ShowSelectedBuildingInfo();
-                        PositionUpgradeText();
-
+            GameObject buildingPrefab = availableBuildings[selectedIndex];
+            ShowSelectedBuildingInfo(buildingPrefab);
+            PositionUpgradeText();
         }
     }
 
@@ -108,7 +114,7 @@ public class BuildingSlot : MonoBehaviour
         }
     }
 
-    
+
     private void PositionUpgradeText()
     {
         if (upgradeCostText == null) return;
