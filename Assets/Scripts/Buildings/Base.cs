@@ -48,6 +48,11 @@ public class Base : Building
     protected override void NewUpdate()
     {
         base.NewUpdate();
+        if (playerOnTop)
+        {
+            InitializeUpgradePath("habitatMaxLevel");
+        }
+
         if (shieldHP <= 0)
         {
             timeSinceDamage += Time.deltaTime;
@@ -228,7 +233,8 @@ public class Base : Building
         }
         UpdateShieldStatus();
         slotSpacing += 3;
-        AddSlots(1);
+        if (upg > 0)
+            AddSlots(1);
         meteorSpawner.xRange += 3 * upg;
         meteorSpawner.ySpawn += 3 * upg;
 

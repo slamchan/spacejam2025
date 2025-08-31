@@ -16,9 +16,14 @@ public class LaserTurret : Building
 
     private float fireCooldown = 0f;
 
+
     protected override void NewUpdate()
     {
         base.NewAwake();
+        if (playerOnTop)
+        {
+            InitializeUpgradePath("laserTurretMaxLevel");
+        }
         if (!CanShoot() | currentLevel < 1)
             return;
 
@@ -37,7 +42,7 @@ public class LaserTurret : Building
     {
         {
             return ResourceManager.Instance.HasEnough(ownerPlayerId, "power", powerRequired) && currentWorkers > 1;
-         }
+        }
     }
 
     private Meteor FindNearestMeteor()

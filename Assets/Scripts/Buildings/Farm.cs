@@ -19,4 +19,13 @@ public class Farm : Building
     {
         owner.powerExpense += 1 * upg;
     }
+
+    protected override void NewUpdate()
+    {
+        base.NewUpdate();
+        if (playerOnTop)
+        {
+            InitializeUpgradePath("farmDomeMaxLevel");
+        }
+    }
 }

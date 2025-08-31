@@ -320,7 +320,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 5088316998373936774, guid: bd39e90b7a28bd148aa45a40f40b4521, type: 3}
+  m_Sprite: {fileID: 2023553009028401766, guid: 307c2e1f1c45852458d03fd7fdf5f82a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -369,7 +369,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.5, y: 1.5}
+    oldSize: {x: 3.18, y: 1.23}
     newSize: {x: 3.61, y: 4.12}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -395,22 +395,10 @@ MonoBehaviour:
   - resCost: 0
     resType: ore
     requiredBuildLevel: 0
-    sprite: {fileID: 5088316998373936774, guid: bd39e90b7a28bd148aa45a40f40b4521, type: 3}
+    sprite: {fileID: 2023553009028401766, guid: 307c2e1f1c45852458d03fd7fdf5f82a, type: 3}
   - resCost: 0
     resType: ore
     requiredBuildLevel: 0
-    sprite: {fileID: -855298285791758126, guid: b24f20d0bf29c1c49bd0ceabc4654fc4, type: 3}
-  - resCost: 0
-    resType: ore
-    requiredBuildLevel: 0
-    sprite: {fileID: 6937817954938267909, guid: 9b92a796865ceeb489871a28dfda1879, type: 3}
-  - resCost: 0
-    resType: ore
-    requiredBuildLevel: 0
-    sprite: {fileID: -6470460504253458178, guid: 8f5beea1e07698949b5ff9db884bd05e, type: 3}
-  - resCost: 0
-    resType: ore
-    requiredBuildLevel: 0
-    sprite: {fileID: -4178046375966092550, guid: 18bebd0961a0b554594c2d021a5f17b9, type: 3}
+    sprite: {fileID: -7450124318133996054, guid: 4dc298648870640429d5b59122f0487a, type: 3}
   buildingName: IceDrill
   upgradeCostText: {fileID: 7119800386542062150}

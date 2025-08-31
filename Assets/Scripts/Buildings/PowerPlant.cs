@@ -17,4 +17,13 @@ public class PowerPlant : Building
         }
 
     }
+
+    protected override void NewUpdate()
+    {
+        base.NewUpdate();
+        if (playerOnTop)
+        {
+            InitializeUpgradePath("powerMaxLevel");
+        }
+    }
 }

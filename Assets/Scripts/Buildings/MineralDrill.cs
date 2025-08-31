@@ -20,4 +20,13 @@ public class MineralDrill : Building
     {
         owner.powerExpense += 2 * upg;
     }
+
+    protected override void NewUpdate()
+    {
+        base.NewUpdate();
+        if (playerOnTop)
+        {
+            InitializeUpgradePath("oreDrillMaxLevel");
+        }
+    }
 }

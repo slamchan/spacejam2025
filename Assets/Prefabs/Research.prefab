@@ -457,7 +457,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 5088316998373936774, guid: bd39e90b7a28bd148aa45a40f40b4521, type: 3}
+  m_Sprite: {fileID: 2023553009028401766, guid: 307c2e1f1c45852458d03fd7fdf5f82a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -506,7 +506,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.5, y: 1.5}
+    oldSize: {x: 3.18, y: 1.23}
     newSize: {x: 3.61, y: 4.12}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -528,8 +528,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Research
   ownerPlayerId: 1
   currentLevel: 0
-  upgradePath: []
+  upgradePath:
+  - resCost: 0
+    resType: 
+    requiredBuildLevel: 0
+    sprite: {fileID: 221864673165975527, guid: 28404a955bbda304c9bc05ab08d68136, type: 3}
   buildingName: Research center
   upgradeCostText: {fileID: 7119800386542062150}
+  baseCost: 0
   selectedTechIndex: 0
   selectedTechText: {fileID: 4453067066270830597}

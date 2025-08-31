@@ -11,6 +11,7 @@ public class Building : MonoBehaviour
         public int resCost;
         public string resType;
         public int requiredBuildLevel;
+        public TechNode requiredTech;
         public Sprite sprite;
     }
 
@@ -32,6 +33,38 @@ public class Building : MonoBehaviour
 
 
     public TMP_Text upgradeCostText;
+    public int baseCost;
+
+    protected void InitializeUpgradePath(string techIdPrefix)
+    {
+        owner = ResourceManager.Instance.players[ownerPlayerId];
+        int maxLevel = 1 + owner.GetMaxTechLevelByIdPrefix(techIdPrefix);
+        if (upgradePath.Length >= maxLevel) return;
+        for (int i = 1; i < maxLevel; i++)
+        {
+            UpgradeLevel level = new UpgradeLevel();
+            if (i == 1)
+            {
+                level.resCost = baseCost;
+            }
+            level.resCost += i * baseCost;
+            if (i - 1 > 0)
+            {
+                level.resCost += (i - 1) * baseCost;
+            }
+            level.resType = upgradePath[0].resType;
+            level.requiredBuildLevel = upgradePath.Length - 1;
+            level.requiredTech = owner.techTree.GetNode(techIdPrefix, i);
+            level.sprite = upgradePath[1].sprite;
+            UpgradeLevel[] newUpgradePath = new UpgradeLevel[upgradePath.Length + 1];
+            for (int u = 0; u < upgradePath.Length; u++)
+            {
+                newUpgradePath[u] = upgradePath[u];
+            }
+            upgradePath = newUpgradePath;
+            upgradePath[i + 1] = level;
+        }
+    }
 
 
     protected void Update()
@@ -164,6 +197,7 @@ public class Building : MonoBehaviour
 
     protected void TryUpgrade()
     {
+        Debug.Log($"try upgrade from {currentLevel} to {currentLevel + 1}");
         if (currentLevel >= upgradePath.Length - 1) return;
 
         var next = upgradePath[currentLevel];
